@@ -371,6 +371,7 @@ class RegistrationForm {
         $this->insertValue['sex'] = null;
         $this->insertValue['city'] = null;
         $this->insertValue['login'] = null;
+        $this->insertValue['nickname'] = null;
         $this->insertValue['password'] = null;
         $this->insertValue['email'] = null;
         $this->insertValue['phone'] = null;
@@ -467,6 +468,7 @@ class RegistrationForm {
                     if($this->checkRepeatPassword()) {
                         if($this->checkAllValue()) {
                             $insertSQL = $this->getQuery();
+//                            echo $insertSQL;
                             if($this->SQL_HELPER->insert($insertSQL)) {
     //                            if($this->sendUserActivateMail()) {
                                     $this->clearInsertValueArray();
