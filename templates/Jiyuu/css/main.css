@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14.12.2013, 9:04:13
+    Author     : max
+*/
+
+.ContentBlock {
+    min-height: 500px;
+    box-shadow: 
+         
+        2px 650px 0px #fff, 
+        -2px 650px 0px #fff, 
+        1px 600px 1px #fff, 
+        -1px 600px 1px #fff,
+        0px 550px 2px #fff,
+        0px 500px 2px #fff,
+        0px 450px 2px #fff,
+        0px 0px 2px rgba(0,0,0,.3)
+        ;
+    // IE 9 fix for table inner elements
+    border-collapse: separate;
+}
+
+.requestApprovedButton {
+    float: left;
+    height: 30px;
+    border-right: 1px rgba(255,255,255,0.2) solid;
+    border-left: 1px rgba(255,255,255,0.2) solid;
+}
+
+.requestApprovedButton a{
+    text-decoration: none;
+    display: block;
+    font: 14px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+    text-shadow: 0px 0px 3px #000;
+    color: #fff;
+    padding: 0px 5px 0px 5px;
+    height: 30px;
+    
+}
+
+.requestApprovedButton:hover {
+    background: rgba(0,0,0,0.2);
+    box-shadow: inset 0px 1px 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+}

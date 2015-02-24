@@ -1,0 +1,38 @@
+.TopPanelBlock .m_block.menu {
+    float: left;
+    
+}
+
+/* Menu */
+.horizontal_1_lvl {
+    display: block;
+    list-style-type: none;
+}
+
+.horizontal_1_lvl.main {
+    height: 30px;
+    border-left: rgba(255,255,255,0.4) 1px solid;
+}
+.horizontal_1_lvl.main li {
+    font: bold 16px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    float: left;
+    text-align: center;
+    position: relative;
+    border-right: #6d6d6d 1px solid;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.horizontal_1_lvl.main li a {
+    text-decoration: none;
+    display: block;
+    font: 14px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+    text-shadow: 0px 0px 3px #000;
+    color: #fff;
+    padding: 0px 5px 0px 5px;
+    height: 30px;
+}
+.horizontal_1_lvl.main li a:hover {
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.5);
+    background: rgba(255,255,255,.7);
+}

@@ -1,0 +1,712 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14.01.2014, 9:48:50
+    Author     : max
+*/
+
+
+
+
+.JRequestListElement {
+    width: 900px;
+    margin: auto auto;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.JRequestListHeder, 
+.JFestsListHeder {
+    text-align: left;
+    font: 20px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #fff;
+    text-shadow: none;
+    //border: 1px #1b7fcc solid;
+    font-weight: bold;
+    background-color: #7ea4ee;
+    height: 30px;
+}
+.JRequestListHeder {
+    background: #552FB3;
+    background: #EE4444;
+    background: #f60;
+    font-weight: bold;
+    text-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+    //box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5);
+    /*width: 810px;*/
+}
+
+
+.JRequestListHeder .JRequestTypeTitle, 
+.JFestsListHeder .JRequestTypeTitle {
+    height: 30px;
+    float: left;
+    padding: 0px 20px 0px 20px;
+}
+
+/*.JRequestListHeder .JRequestTypeTitle {
+    height: 30px;
+    float: left;
+    padding: 0px 30px 0px 30px;
+    background: #FF0000;
+    font-weight: bold;
+    text-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5);
+    width: 810px;
+}*/
+
+.JRequestListHeder .JRequestTypeTitle  a, 
+.JFestsListHeder .JRequestTypeTitle a {
+    text-decoration: none;
+    display: block;
+    height: 30px;
+    color: #fff;
+}
+.JFestsListHeder .JRequestAddStatus {
+    height: 30px;
+    float: right;
+    padding: 0px 20px 0px 20px;
+}
+.JRequestListHeder .JRequestAddIcon, 
+.JFestsListHeder .JRequestAddIcon {
+    height: 30px;
+    width: 30px;
+    background-color: #1b7fcc;
+    float: right;
+    font-weight: normal;
+}
+
+.JFestsListHeder .JRequestAddIcon.back {
+    background: #1b7fcc url('../img/backIcon.png') center center no-repeat;
+}
+
+.JRequestListHeder .JRequestAddIcon  a, 
+.JFestsListHeder .JRequestAddIcon a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    color: #fff;
+    text-shadow: none;
+}
+
+.JFestsListHeder .JRequestAddIcon #eye {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    background-color: #fff;
+    -webkit-border-top-left-radius: 10em;
+    -webkit-border-top-right-radius: 1em;
+    -webkit-border-bottom-right-radius: 10em;
+    -webkit-border-bottom-left-radius: 1em;
+    -moz-border-radius-topleft: 10em;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 10em;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 10em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 10em;
+    border-bottom-left-radius: 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    margin: 8px auto;
+}
+.JFestsListHeder .JRequestAddIcon #eye span.inner {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #1b7fcc;
+    top: 3px;
+    left: 3px;
+}
+
+
+.JRequestList {
+    //border-top: 1px #fff solid;
+    padding: 10px 10px 5px 10px;
+    background: #7ea4ee;
+}
+.JFestsListInfo {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.JFestsListInfo .JFestsListInfoDate {
+    font: 14px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 15px 20px 15px 20px;
+    height: 50px;
+}
+.JFestsListInfo .JFestsListInfoDate .infoType {
+    font: 13px/15px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+    font-weight: bold;
+}
+.JFestsListInfo .JFestsListInfoDate .infoData {
+    font: 11px/15px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #4d4d4d;
+    //font-weight: bold;
+}
+.JFestsListInfoDescription {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 5px 40px 10px 40px;
+    text-align: justify;
+    color: #4d4d4d;
+}
+.JFestsListInfoRegulations {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 5px 40px 20px 40px;
+    color: #4d4d4d;
+}
+.JFestsListInfoTitle {
+    font: 14px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+    font-weight: bold;
+    background-color: #d4dee5;
+    padding: 0px 20px 0px 20px;
+}
+
+
+.JRequestForm {
+    font: 13px/17px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #4d4d4d;
+    line-height: 17px;
+}
+.JRequestForm .JRequestFormTable {
+    width: 100%;
+}
+
+.JRequestForm .JRequestFormTable .JRequestFormTable_Text{
+    width: 40%;
+    text-align: right;
+    padding-right: 5px;
+    vertical-align: middle;
+} 
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input {
+    width: 60%;
+    text-align: left;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+.JRequestForm .JRequestFormTable .JRequestFormTable_Text .text {
+    font: 13px/17px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #4d4d4d;
+    line-height: 17px;
+}
+
+.JRequestForm .JRequestFormTable .JRequestFormTable_Text .info {
+    font: 11px/15px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #7d7d7d;
+    line-height: 17px;
+}
+
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input input[type=text],
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input input[type=password],
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input textarea,
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input .selectBox {
+    width: 400px;
+    margin: 5px 0px 5px 0px;
+}
+
+.JRequestForm .JRequestFormButton {
+    font: 0.95em 'Open Sans',Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1b7fcc;
+    padding: 5px 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    border: none;
+    background: #e2e2e2;
+    background: -moz-linear-gradient(top, #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%);
+    background: -webkit-linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    background: -o-linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    background: -ms-linear-gradient(top, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0px 1px 0px #fff;
+}
+
+.JRequestForm .JRequestFormButton:hover {
+    box-shadow: inset 0px 1px 5px rgba(0,0,0,0.5);
+}
+
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input input[type=text],
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input input[type=password],
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input .selectBox {
+    height: 20px;
+    /*font-weight: bold;*/
+}
+
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input textarea {
+    height: 50px;
+    min-height: 50px;
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    max-height: 300px;
+    padding: 10px;
+}
+
+.JRequestForm .JRequestFormTable .JRequestFormTable_Input .selectBox {
+    width: 420px;
+}
+
+.JRequestForm .mandatoryText {
+    text-align: justify;
+    margin: 5px 0px 5px 0px;
+}
+.JRequestForm .agreements {
+    text-align: justify;
+}
+.JRequestForm .agreements .agreementsTitle{
+    font: 16px/1 "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    font-weight: bold;
+    text-align: left;
+    color: #1b7fcc;
+}
+
+.JRequestForm .agreements .agreementsText {
+    overflow: auto;
+    max-height: 150px;
+    /*background: #dfdfdf;*/
+    /*background: rgb(240,245,255);*/
+    background: rgb(245,250,255);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    box-shadow: 0 0 3px rgba(255,255,255,1), 
+        inset 0px 1px 5px rgba(0,0,0,0.5);
+    margin: 5px 0px 5px 0px;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.JRequestForm .agreements .agreementsText p {
+    text-indent: 30px;
+    text-shadow: 0 1px 0 #fff;
+}
+.agreementsCheckBox {
+    text-align: center;
+}
+.agreementsDateOfChange {
+    font: 13px/1 "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.JRequestError {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 0px 40px 10px 40px;
+    color: #4d4d4d;
+    text-align: center;
+}
+.JRequestAgreementsTitle {
+    font: 16px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+    font-weight: bold;
+    padding: 0px 20px 0px 20px;
+}
+.JRequestAgreementsText {
+    font: 12px/17px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 5px 40px 10px 40px;
+    text-align: justify;
+    color: #4d4d4d;
+    overflow: auto;
+    max-height: 300px;
+    background: rgb(245,250,255);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    box-shadow: 0 0 3px rgba(255,255,255,1), inset 0px 1px 5px rgba(0,0,0,0.5);
+    margin: 5px 40px 20px 40px;
+    text-shadow: 0 1px 0 #fff;
+}
+.JRequestAgreementsCheckBox {
+    text-align: center;
+    font: 12px/13px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+    line-height: 13px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.JRequestTable, .JRequestTable td, .JRequestTable th {
+    border: 1px #aaaaaa solid;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 5px;
+}
+
+.JRequestInserOk, .JRequestInserError {
+    text-align: center;
+    font: 16px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.JRequestInserOk {
+    color: green;
+}
+
+.JRequestInserError {
+    color: red;
+}
+
+.requestId {
+    font: 16px/25px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+    font-weight: bold;
+    background-color: #f19327;
+    background-color: #1b7fcc;
+    background-color: #7ea4ee;
+    background-color: #c1d2f4;
+    text-shadow: none;
+    padding: 0px 0px 0px 10px;
+    height: 25px;
+}
+.requestElement.allUsers .requestId {
+    color: #0000ff;
+    color: #4d4d4d;
+}
+.requestId .requestIdButtonPanel {
+    float: right;
+}
+.requestId .requestIdButtonPanel .requestIdButtonPanelButton {
+    float: right;
+    height: 25px;
+    width: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: #7ea4ee;
+}
+
+.requestId .requestIdButtonPanel .requestIdButtonPanelButton #eye {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    background-color: #000;
+    -webkit-border-top-left-radius: 10em;
+    -webkit-border-top-right-radius: 1em;
+    -webkit-border-bottom-right-radius: 10em;
+    -webkit-border-bottom-left-radius: 1em;
+    -moz-border-radius-topleft: 10em;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 10em;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 10em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 10em;
+    border-bottom-left-radius: 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    margin: 5px auto;
+}
+.requestId .requestIdButtonPanel .requestIdButtonPanelButton #eye span.inner {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #7ea4ee;
+    top: 3px;
+    left: 3px;
+}
+
+.requestMainBlock {
+    background: #fff;
+    border: none;
+    box-shadow: inset 0px 1px 5px rgba(0,0,0,0.5);
+    text-shadow: 0 1px 0 #fff;
+    margin: 0px;
+    //padding-bottom: 10px
+}
+.requestElement {
+    margin: 0px 0px 15px 0px;
+}
+.requestInfo {
+    text-shadow: 0 1px 0 #fff;
+    padding: 10px;
+}
+.requestTitle {
+    font: 17px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #f60;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.requestInfoBlock {
+    width: 310px;
+    float: left;
+}
+
+.requestInfo .requestLableBlock {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+}
+.requestLableBlock .requestLable {
+    color: #1b7fcc;
+}
+.requestLableBlock .requestLableValue {
+    color: #4d4d4d;
+}
+.requestLableBlock .requestLableValue a {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+.requestBottomLableBlock {
+    clear: both;
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #4d4d4d;
+    text-align: left;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    background-color: #eee;
+    background-color: #c1d2f4;
+    //box-shadow: inset 0px -1px 3px rgba(0,0,0,0.3);
+    //border-top: 1px #ddd solid;
+}
+.requestBottomLableBlock a, 
+.JRequestUsersListTable a, 
+.JRequestFilesTable a {
+    text-decoration: none;
+    color: #1b7fcc;
+}
+
+.requestBottomLableBlockLeft {
+    width: 400px;
+    float: left;
+    text-align: left;
+}
+.requestBottomLableBlockRight {
+    width: 400px;
+    float: right;
+    text-align: right;
+}
+.requestBottomLableBlockBottom {
+    clear: both;
+}
+
+.approved {
+    color: #2FB12F;
+}
+.noapproved {
+    color: #f19327;
+}
+.nopreapproved {
+    color: #EE4444;
+}
+.contest {
+    color: #2FB12F;
+}
+.nocontest {
+    color: #B960DB;
+}
+
+.requestUsersListBlock {
+    width: 560px;
+    float: right;
+}
+.requestFilesBlock {
+    clear: both;
+    text-align: center;
+    padding: 10px;
+    text-shadow: 0 1px 0 #fff;
+}
+.requestUsersList {
+    text-shadow: 0 1px 0 #fff;
+    padding: 10px;
+    text-align: right;
+}
+
+.requestUsersList .requestTitle {
+    text-align: right;
+}
+
+.JRequestUsersListTable {
+    max-width: 100%;
+    float: right;
+    margin-bottom: 10px;
+}
+.JRequestFilesTable {
+    max-width: 100%;
+}
+.JRequestUsersListTable, 
+.JRequestUsersListTable td, 
+.JRequestUsersListTable th,
+.JRequestFilesTable, 
+.JRequestFilesTable td, 
+.JRequestFilesTable th {
+    border: 1px #7ea4ee solid;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 5px;
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #4d4d4d;
+}
+.JRequestUsersListTable td, 
+.JRequestFilesTable td {
+    font-weight: bold;
+}
+
+.tableCellConfirmed, 
+.JRequestUsersListTable td.tableCellConfirmed, 
+.JRequestFilesTable td.tableCellConfirmed  {
+    color: #2FB12F;
+    font-weight: bold;
+}
+.tableCellNoConfirmed, 
+.JRequestUsersListTable td.tableCellNoConfirmed, 
+.JRequestFilesTable td.tableCellNoConfirmed {
+    color: #EE4444;
+    font-weight: bold;
+}
+.JRequestUserDelete,.JRequestFileDelete, .JRequestDelete {
+    width: 12px;
+    height: 16px;
+    background: url('../img/treshIcon16.png') center center no-repeat;
+}
+.JRequestDelete {
+    width: 25px; 
+    height: 25px;
+}
+.JRequestFileOk {
+    background: url('../img/okIcon16.png') center center no-repeat;
+}
+.JRequestFileNo {
+    background: url('../img/noIcon16.png') center center no-repeat;
+}
+.JRequestFileAdd {
+    background: url('../img/fileAddIcon16.png') center center no-repeat;
+}
+.JRequestFileIcon {
+    width: 16px;
+    height: 16px;
+    float: right;
+    cursor: pointer;
+    margin: 0px 2px 0px 2px;
+}
+.JRequestFileIcon a {
+    text-decoration: none;
+    border: none;
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+.JRequestAudioPlayer {
+    float: right;
+    width: 250px;
+}
+.JRequestAudioPlayer .audioplayer {
+    height: 15px;
+    //background: #c1d2f4;
+    background: #7ea4ee;
+    //border: 1px #7ea4ee solid;
+    border: none;
+    
+    box-shadow: none;
+    font: 10px/15px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+    color: #7ea4ee;
+    color: #fff;
+    text-shadow: none; 
+}
+
+.JRequestAudioPlayer .audioplayer-playpause:hover, 
+.JRequestAudioPlayer .audioplayer-playpause:focus,
+.JRequestAudioPlayer .audioplayer-volume:hover,
+.JRequestAudioPlayer .audioplayer-volume:focus {
+    //background-color: #7ea4ee;
+    background-color: #618EE6;
+}
+.JRequestAudioPlayer .audioplayer-bar-loaded {
+    background-color: #d4d4d4;
+}
+.JRequestAudioPlayer .audioplayer-bar-played {
+    //background: #7ea4ee;
+    background: #08CEFF;
+}
+.JRequestAudioPlayer .audioplayer-volume-adjust {
+    //background: #c1d2f4;
+    background: #7ea4ee;
+}
+.JRequestAudioPlayer .audioplayer-volume-adjust div {
+    background-color: #fff;
+}
+.JRequestAudioPlayer .audioplayer-volume-adjust div div {
+    //background: #7ea4ee;
+    background: #08CEFF;
+}
+.audioplayer-bar {
+    background-color: #fff;
+    height: 5px;
+    border: none;
+    box-shadow: none;
+    margin: 0px 10px 0px 10px;
+    top: 5px;
+}
+.JRequestAudioPlayer .audioplayer-time {
+    font: 10px/15px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+}
+
+.JRequestUserAddForm {
+    clear: both;
+}
+
+.requestLableText {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #4d4d4d;
+}
+
+.JRequestFormButton.small {
+    font: 13px/17px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 0px 5px 0px 5px;
+    margin: 2px 5px 2px 5px;
+}
+
+.JFestsListMainInfo {
+    font: 16px/17px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: red;
+    font-weight: bold;
+    padding: 0px 30px 0px 30px;
+}
+
+.JFestsAllUsersAdd {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    font-weight: bold;
+    color: #2FB12F;
+    clear: both;
+}
+
+.icon_star {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    margin: 0px 1px 0px 1px;
+    color: #f19327;
+    cursor: help;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.icon_star:before {
+content: "\2605";
+}

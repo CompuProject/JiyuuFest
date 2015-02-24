@@ -1,0 +1,229 @@
+.ContentBlock {
+    text-align: justify;
+    font: 16px/18px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    line-height: 1.4;
+    text-shadow: 0 0 10px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,1);
+}
+
+.ContentBlock hr {
+    border: 0;
+    color: #ef7f1a;
+    background-color: #ef7f1a;
+    height: 1px;
+    margin: 5px 30px 5px 30px;
+}
+
+.ContentBlock p {
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.MainWraper .ContentBlock .Material .text,
+.MainWraper .ContentBlock .material .text  {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.PromoTemplate .MainWraper .ContentBlock .Material .text,
+.PromoTemplate .MainWraper .ContentBlock .material .text  {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.ContentBlock .Materials {
+    /*padding-top: 10px;*/
+    
+}
+
+.MaterialsList .text {
+    /*min-height: 100px;*/
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+    color: #ef7f1a;
+}
+
+a:hover {
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+    color: #f30;
+}
+
+.ContentBlock ol {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.ContentBlock ol li {
+    margin-bottom: 10px;
+}
+.ContentBlock ul {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+.ContentBlock ul.dash {
+    list-style-type: none;
+}
+.ContentBlock ul.dash li:before {
+    content: "- ";
+}
+
+.ContentBlock ul.without_design {
+    list-style-type: none;
+}
+
+.ContentBlock ul.materials_list {
+    margin: 0px;
+    margin-top: 15px;
+    list-style-type: none;
+    font-size: 10px;
+}
+
+.ContentBlock ul.materials_list li {
+    text-align: left;
+    margin-top: 1px;
+    padding: 2px 10px 2px 10px;
+    border-bottom: 1px #666 solid;
+}
+.ContentBlock ul.materials_list li:first-child {
+    border-top: 1px #666 solid;
+}
+
+.ContentBlock ul.materials_list li:hover {
+    background: #ccc;
+}
+
+.ContentBlock .main_paragraph {
+    /*font-weight: bold;*/
+}
+.ContentBlock .info_paragraph {
+    color: #666;
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.ContentBlock .main_text {
+    color: #ef7f1a;
+    font-weight: bold;
+}
+
+.ContentBlock .more_inf {
+    color: #666;
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.ContentBlock .inf {
+    color: #666;
+    font-style: italic;
+    font-size: 12px;
+    /*padding: 20px;*/
+}
+
+.ContentBlock .inf a{
+    color: #999;
+    font-style: normal;
+}
+
+.ContentBlock .right {
+    text-align: right;
+}
+
+.ContentBlock table.table_whith_border, table.table_whith_border{
+    border-collapse: collapse;
+}
+.ContentBlock table.table_whithout_border, table.table_whithout_border {
+    border: none;
+    border-collapse: collapse;
+}
+.ContentBlock table.table_whith_border th, table.table_whith_border th {
+    border: 1px #999 solid;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.2);
+    padding: 5px;
+    font-size: 12px;
+}
+.ContentBlock table.table_whith_border td, table.table_whith_border td {
+    border: 1px #999 solid;
+    border-collapse: collapse;
+    padding: 5px;
+    color: #333;
+    font-size: 12px;
+}
+.ContentBlock table.table_whithout_border td, table.table_whithout_border td {
+    border: none;
+    border-collapse: collapse;
+    padding: 5px;
+    color: #333;
+    font-size: 12px;
+}
+.ContentBlock table.table_whithout_border th, table.table_whithout_border th {
+    border: none;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.2);
+    padding: 5px;
+    font-size: 12px;
+}
+
+.table_whith_border {
+    border: 1px #999 solid;
+    border-collapse: collapse;
+    /*font: 0.95em 'Open Sans',Arial,Helvetica,sans-serif;*/
+    font: 14px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    line-height: 1.4;
+    color: #000;
+    text-shadow: 0 0 10px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,1);
+    margin: 5px;
+}
+
+.table_whith_border td,
+.table_whith_border th {
+    border: 1px #999 solid;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+.table_whith_border td {
+    font-size: 12px;
+}
+
+.table_whith_border th {
+    font-size: 14px;
+    color: #ef7f1a;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table_whithout_border {
+    border: none;
+    border-collapse: collapse;
+/*    font: 0.95em 'Open Sans',Arial,Helvetica,sans-serif;*/
+    font: 14px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    line-height: 1.4;
+    color: #000;
+    text-shadow: 0 0 10px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,1);
+    margin: 5px;
+}
+
+.table_whithout_border td,
+.table_whithout_border th {
+    border: none;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+.table_whithout_border td {
+    font-size: 12px;
+}
+
+.table_whithout_border th {
+    font-size: 14px;
+    color: #ef7f1a;
+    font-weight: bold;
+    text-align: center;
+}

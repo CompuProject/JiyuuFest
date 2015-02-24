@@ -1,0 +1,100 @@
+RequestNoStart=Подача заявок еще не началась
+RequestStart=Подача заявок началась
+RequestStop=Подача заявок завершена, досыл материалов
+RequestEnd=Досыл материалов завершен
+FestEnd=Фестиваль завершен
+
+ShowFest=Перейти
+BackToFestList=Назад
+BackToFest=Отменить
+AgreeFestivalRules=Подавая заявку вы подтверждаете, что ознакомлены с <a class='fancybox-doc' href='#FestElementRegulationsHide' title='Правила поведения на фестивале'>правилами поведения на фестивале</a>.
+AllFestivalRules=<a class='fancybox-doc' href='#FestElementRegulationsHide' title='Правила подачи заявки и правила поведения на фестивале'>Правила подачи заявки и правила поведения на фестивале</a>.
+AgreeAndSendRequest=Я ознакомлен с правилами.
+SendRequest=Подать заявку.
+thisDate=Сегодня
+FestDate=Начало фестиваля
+noFestDate=дата неизвестна
+Intramural=Очные заявки
+filingRequest_Intramural_Start=Начало подачи заявок.
+filingRequest_Intramural_Stop=Окончание приема заявок.
+filingRequest_Intramural_End=Окончание досыла материалов.
+Extramural=Заочные заявки
+filingRequest_Extramural_Start=Начало подачи заявок.
+filingRequest_Extramural_Stop=Окончание приема заявок.
+filingRequest_Extramural_End=Окончание досыла материалов.
+FestElementDescriptionHeder=Информация о фестивале
+FestElementRegulationsHeder=Правила поведения на фестивале
+RequestRegulationsHeder=Правила подачи заявки и поведения во время выступления
+
+ErrorUnauthorized=Только зарегистрированный пользователь может просматривать и подавать заявки.
+ErrorUnknownFest=Некорректная ссылка. Неизвестный фестиваль.
+ErrorUnknownRequestAction=Некорректная ссылка. Неизвестная операция над заявкой.
+ErrorUnknownRequestType=Некорректная ссылка. Неизвестный тип заявки.
+ErrorCreateRequestStopOrNotStart=Невозможно создать заявку. Возможно подача заявок завершилась или еще не началась.
+ErrorsInsertDataCheckMainInsert=Некорректные данные.
+ErrorNoRequestID=Некорректная ссылка. Неуказан идентификатор заявки.
+
+createButton=Подать заявку
+nextButton=Дальше
+
+ContestVal=Участвую в конкурсе
+NoContestVal=Не участвую в конкурсе
+contest=Участие в конкурсе
+numberOfParticipants=Количество участников
+from=от
+to=до
+min=мин.
+sec=сек.
+duration=Время выстепления
+wish=Пожелания
+loadFileOrСheck=Загрузите файл или выберите один из вариантов
+loadFileNowOrLater=Этот файл необходим для подтверждения заявки.<br>Вы можете загрузить файл сейчас или вам придется сделать это позже в режиме редактирования заявок.
+loadFileDocFileForRules=Документ Microsoft World (doc|docx) или OpenOffice (odt) оформленный согласно правилам подачи заявки.
+loadFile200MB=Размер файла не должен превышать 200MB
+loadFile15MB=Размер файла не должен превышать 15MB
+loadFile5MB=Размер файла не должен превышать 5MB
+songTitle=Название песни
+artistSongs=Исполнитель песни
+kosbend=Название косбенда
+audition=Пойду на прослушивание
+demo_audition=Демозапись
+instrumental=Живая музыка
+audioInVideo=Аудио в Видеофайле
+audio_instrumental_audioInVideo=Аудио дорожка
+noVideo=Без видео
+video_noVideo=Видеоряд
+danceTitle=Название танца
+sceneTitle=Название сценки
+fendom=Фендом
+scenario=Сценарий
+defileType=Тип дефиле
+defileTitle=Название дефиле
+audio=Аудио дорожка
+actionDefileTitle=Название экшен дефиле
+collage=Коллаж
+explication=Экспликация
+amvTitle=Название AMV
+musicTracks=Список использованной музыки
+programs=Список использованных программ
+amv=AMV
+videoCosplayTitle=Название видео косплея
+characters=Список персонажей<br>учавствующих в видео косплее
+videographer=Видеооператор
+video=Видеофайл
+imageTitle=Название рисунка
+image=Изображение
+photoTitle=Название фотоподборки
+photographer=Фотограф
+
+
+ContestRequest=Конкурсная
+NoContestRequest=Вне конкурса
+
+RequestCreatedFor=Заявку создал
+RequestCreated=Дата создания
+RequestChanged=Последние изменения
+
+RequestMember=Участник
+CharacterName=Персонаж
+SuitPhoto=Фото костюма
+OriginalImage=Фото персонажа

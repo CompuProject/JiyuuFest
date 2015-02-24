@@ -1,0 +1,509 @@
+.FestElementRegulationsHide {
+    width: 900px;
+    padding-bottom: 50px;
+}
+
+.RequestStepHeder {
+    background-color: #7ea4ee;
+    height: 30px;
+    font: bold 16px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #fff;
+    text-align: center;
+    text-shadow: none;
+}
+
+.JRequestError {
+    padding: 0px 50px 0px 50px;
+}
+.JRequestError div {
+    font: bold 16px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-align: justify;
+    color: #fff;
+    text-shadow: none;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: #ef7f1a;
+    background: #e71414;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.7);
+}
+
+.FestElementRegulationsHide .FestElementRegulationsHeder {
+    text-align: center;
+    font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+}
+
+.FestElementRegulationsHide .FestElementRegulationsText {
+    padding: 10px 50px 25px 50px;
+    text-align: justify;
+    font: 12px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+.FestsList .FestElement {
+    margin-bottom: 20px;
+}
+
+.FestElement {
+    
+}
+
+.FestElement .FestElementHeder {
+    background-color: #7ea4ee;
+    height: 30px;
+}
+
+.FestElement .FestElementHeder .FestElementHederTitle {
+    height: 30px;
+    float: left;
+    padding: 0px 20px 0px 20px;
+    font: bold 20px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+.FestElement .FestElementHeder .FestElementHederLeftInforBlock {
+    height: 30px;
+    float: left;
+    padding: 0px 20px 0px 20px;
+    font: bold 12px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+    border-left: 2px solid #fff;
+}
+
+.FestElement .FestElementHeder .FestElementHederRightInforBlock,
+.FestElement .FestElementHeder .FestElementHederFestDate,
+.FestElement .FestElementHeder .FestElementHederThisDate,
+.FestElement .FestElementHeder .FestElementHederSendRequestButton {
+    height: 30px;
+    float: right;
+    padding: 0px 20px 0px 20px;
+    font: bold 12px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+    border-left: 2px solid #fff;
+}
+.FestElement .FestElementHeder .FestElementHederSendRequestButton {
+    padding: 0px;
+    background: #ef7f1a;
+}
+.FestElement .FestElementHeder .FestElementHederSendRequestButton:hover {
+    background: #ef7f1a;
+}
+.FestElement .FestElementHeder .FestElementHederSendRequestButton a {
+    display: block;
+    height: 30px;
+    padding: 0px 20px 0px 20px;
+    font: bold 12px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.FestElement .FestElementHeder .FestElementHederSendRequestButton .FestElementHederSendRequestButtonThisDate {
+    margin-left: 10px;
+    display: none;
+}
+.FestElement .FestElementHeder .FestElementHederSendRequestButton:hover .FestElementHederSendRequestButtonThisDate {
+    display: inline;
+}
+.FestElement .FestElementBanner {
+    height: 150px;
+}
+.FestElement .FestElementInfo {
+    
+}
+
+.FestElement .FestElementInfo .FestElementInfoData {
+    float: left;
+    width: 299px;
+    height: 160px;
+    /*border-right: 1px dotted #c1d2f4;*/
+}
+
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock {
+    width: 299px;
+}
+
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock .FestElementInfoDataHeder {
+    text-align: center;
+    font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+}
+
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock .FestElementInfoDataArea {
+    font: bold 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock .FestElementInfoDataArea .infoType,
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock .FestElementInfoDataArea .infoData {
+    float: left;
+    padding: 1px;
+}
+
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock .FestElementInfoDataArea .infoType {
+    color: #1b7fcc;
+    width: 176px;
+    text-align: right;
+}
+.FestElement .FestElementInfo .FestElementInfoData .FestElementInfoDataBlock .FestElementInfoDataArea .infoData {
+    color: #ef7f1a;
+    width: 119px;
+    text-align: left;
+}
+
+.FestElement .FestElementInfo .FestElementDescription {
+    float: right;
+    width: 660px;
+    height: 160px;
+}
+
+.FestElement .FestElementInfo .FestElementDescription .FestElementDescriptionHeder {
+    text-align: center;
+    font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+}
+
+.FestElement .FestElementInfo .FestElementDescription .FestElementDescriptionText {
+    height: 130px;
+    padding: 0px 50px 0px 15px;
+    text-align: justify;
+    font: 12px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.FestElement .FestElementInfo .FestElementRegulations {
+}
+
+.FestElement .FestElementInfo .FestElementRegulations .FestElementRegulationsAgree {
+    text-align: center;
+    padding: 25px;
+    text-align: center;
+    font: bold 18px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+.FestElement .FestElementInfo .FestElementRegulations .FestElementRegulationsHeder {
+    text-align: center;
+    font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+}
+
+.FestElement .FestElementInfo .FestElementRegulations .FestElementRegulationsText {
+    padding: 10px 50px 25px 50px;
+    text-align: justify;
+    font: 12px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+.FestElement .FestElementInfo a.FestElementSendRequestButton,
+a.FestElementSendRequestButton {
+    display: block;
+    width: 250px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    font: bold 16px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-shadow: none;
+    background: #ef7f1a;
+    color: #fff;
+    padding: 10px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.7);
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.FestElement .FestElementInfo a.FestElementSendRequestButton:hover,
+a.FestElementSendRequestButton:hover  {
+    box-shadow: inset 0px 1px 5px rgba(0,0,0,0.7);
+}
+
+.FestElementRequestTypeDate {
+    
+}
+
+.FestElementRequestTypeDate .FestElementRequestTypeDateElement {
+    float: left;
+    width: 310px;
+    height: 60px;
+    margin: 5px;
+    background: #ef7f1a;
+    color: #fff;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.7);
+    cursor: pointer;
+    text-shadow: none;
+}
+.FestElementRequestTypeDate .FestElementRequestTypeDateElement:hover {
+    box-shadow: inset 0px 1px 5px rgba(0,0,0,0.7);
+}
+
+.FestElementRequestTypeDate .FestElementRequestTypeDateElement .FestElementRequestTypeDateElementName {
+    text-align: center;
+    font: bold 20px/60px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+}
+.FestElementRequestTypeDate .FestElementRequestTypeDateElement .FestElementRequestTypeDateElementName a {
+    display: block;
+    width: 310px;
+    height: 60px;
+    color: #fff;
+}
+
+
+
+
+.JFRequestRegulations .JFRequestRegulationsHeder {
+    text-align: center;
+    font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #1b7fcc;
+}
+
+.JFRequestRegulations .JFRequestRegulationsText {
+    padding: 10px 50px 25px 50px;
+    text-align: justify;
+    font: 14px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+.FestElementRegulations table,
+.FestElementRegulations table {
+    border-collapse: collapse;
+    /*border: 1px #999 solid;*/
+    margin: 10px;
+}
+
+.FestElementRegulations table td,
+.FestElementRegulations table th {
+    border-collapse: collapse;
+    padding: 10px;
+}
+.FestElementRegulations table td{
+    border: 1px #bfbfbf solid;
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-align: left;
+}
+.FestElementRegulations table th {
+    border: 1px #bfbfbf solid;
+    font: bold 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    background: #ef7f1a;
+    color: #fff;
+    text-shadow: none;
+    text-align: center;
+}
+
+table.JFRequestFormTable {
+    width: 900px;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+table.JFRequestFormTable tr td {
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    background: #fafafa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+    background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+table.JFRequestFormTable tr:hover td{
+    background: #f2f2f2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+    background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+}
+
+table.JFRequestFormTable td.FormTable_Text {
+    width: 279px;
+    text-align: right;
+    padding: 2px 10px 2px 10px;
+}
+
+table.JFRequestFormTable td.FormTable_Text .text {
+    font: 12px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 0px;
+}
+
+table.JFRequestFormTable td.FormTable_Text .info {
+    font: 10px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #9f9f9f;
+    padding: 0px;
+}
+table.JFRequestFormTable td.FormTable_Input {
+    
+}
+table.JFRequestFormTable td.FormTable_Input div {
+    padding: 3px 0px 3px 0px;
+}
+
+table.JFRequestFormTable td.FormTable_Input input[type=text].minTextBox {
+    width: 50px;
+}
+
+table.JFRequestFormTable td.FormTable_Input input[type=text],
+table.JFRequestFormTable td.FormTable_Input input[type=password],
+table.JFRequestFormTable td.FormTable_Input textarea,
+table.JFRequestFormTable td.FormTable_Input .selectBox {
+    width: 579px;
+}
+
+table.JFRequestFormTable td.FormTable_Input textarea {
+    height: 100px;
+    resize: none;
+}
+
+table.JFRequestFormTable td.FormTable_Input textarea.wish {
+    height: 200px;
+}
+
+
+
+
+.RequestElement {
+    margin-bottom: 20px;
+}
+
+.RequestElement .RequestElementHeder {
+    background-color: #7ea4ee;
+    height: 30px;
+    margin-bottom: 25px;
+}
+
+.RequestElement .RequestElementHeder .RequestElementID {
+    height: 30px;
+    float: left;
+    padding: 0px 20px 0px 20px;
+    font: bold 20px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+
+.RequestElement .RequestElementHeder .RequestElementStatus,
+.RequestElement .RequestElementHeder .RequestElementContest,
+.RequestElement .RequestElementHeder .RequestElementType,
+.RequestElement .RequestElementHeder .RequestElementFest {
+    height: 30px;
+    float: right;
+    padding: 0px 20px 0px 20px;
+    font: bold 12px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+    border-left: 2px solid #fff;
+    /*background: #ef7f1a;*/
+}
+.RequestElement .RequestElementHeder .RequestElementFest {
+    padding: 0px;
+}
+.RequestElement .RequestElementHeder .RequestElementFest a {
+    padding: 0px 20px 0px 20px;
+    display: block;
+    color: #fff;
+}
+.RequestElement .RequestElementHeder .RequestElementFest a:hover {
+    background: #ef7f1a;
+}
+
+.RequestElement .RequestElementHeder .RequestElementStatus.rejected { 
+    background: #e71414;
+}
+.RequestElement .RequestElementHeder .RequestElementStatus.issued,
+.RequestElement .RequestElementHeder .RequestElementStatus.renew { 
+    background: #ef7f1a;
+}
+.RequestElement .RequestElementHeder .RequestElementStatus.review { 
+    background: peachpuff;
+    color: #ef7f1a;
+}
+.RequestElement .RequestElementHeder .RequestElementStatus.approved { 
+    background: #00cf00;
+}
+
+.RequestElement .RequestElementInformation {
+    float: left;
+    width: 500px;
+}
+
+.RequestElement .RequestElementInformation .RequestElementInformationElement {
+    height: 20px;
+    font: bold 14px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+.RequestElement .RequestElementInformation .RequestElementInformationElement .RequestElementInformationElementText,
+.RequestElement .RequestElementInformation .RequestElementInformationElement .RequestElementInformationElementValue {
+    height: 20px;
+    font: 12px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    float: left;
+}
+
+.RequestElement .RequestElementInformation .RequestElementInformationElement .RequestElementInformationElementText {
+    text-align: right;
+    padding: 0px 5px 0px 5px;
+    width: 190px;
+}
+
+.RequestElement .RequestElementInformation .RequestElementInformationElement .RequestElementInformationElementValue {
+    font: bold 16px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-align: left;
+    padding: 0px 5px 0px 5px;
+    width: 290px;
+    color: #1b7fcc;
+}
+
+.RequestElement .RequestElementUsers {
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    /*padding: 10px;*/
+    max-width: 400px;
+    margin-right: 50px;
+    float: right;
+}
+.RequestElement .RequestElementUsers .RequestElementUsersElement {
+    
+}
+
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData {
+    font: 11px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed {
+    padding: 0px !important;
+    /*font: 10px/20px helvetica,"segoe UI",arial,sans-serif;*/
+    color: #fff;
+    width: 10px !important;
+    height: 20px;
+    text-align: center;
+}
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed.YES {
+    background: #00cf00;
+}
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed.NO {
+    background: #e71414;
+}
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname,
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementCharacterName {
+    
+}
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto,
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal {
+    padding: 0px !important;
+    width: 70px;
+    height: 70px;
+}
+
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto img,
+.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal img {
+    min-width: 70px;
+    min-height: 70px;
+}
