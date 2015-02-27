@@ -16,21 +16,21 @@ class JiyuuFestRequest_CreateRequest_Dance extends JiyuuFestRequest_CreateReques
         $out .= $this->inputHelper->createFormRow($kosbend, false, $this->localization->getText("kosbend"));
         // demo & audition
         $demo = $this->inputHelper->loadFiles('demo', 'demo', 'demo', false, false, $this->mimeType['video']);
-        $audition = $this->inputHelper->checkbox('audition', 'audition', 'audition', false, '1');
+        $audition = $this->inputHelper->checkbox('audition', 'audition', 'audition', false, '1', $this->getInsertData('audition'));
         $demo_audition = "<div>".$demo."</div><div>".$audition." ".$this->localization->getText("audition")."</div>";
         $demo_audition_info = $this->localization->getText("loadFileOrСheck")."<br>".$this->localization->getText("loadFile200MB");
         $out .= $this->inputHelper->createFormRow($demo_audition, false, $this->localization->getText("demo_audition"), $demo_audition_info);
         // audio & instrumental & audioInVideo
         $audio = $this->inputHelper->loadFiles('audio', 'audio', 'audio', false, false, $this->mimeType['audio']);
-        $instrumental = $this->inputHelper->checkbox('instrumental', 'instrumental', 'instrumental', false, '1');
-        $audioInVideo = $this->inputHelper->checkbox('audioInVideo', 'audioInVideo', 'audioInVideo', false, '1');
+        $instrumental = $this->inputHelper->checkbox('instrumental', 'instrumental', 'instrumental', false, '1', $this->getInsertData('instrumental'));
+        $audioInVideo = $this->inputHelper->checkbox('audioInVideo', 'audioInVideo', 'audioInVideo', false, '1', $this->getInsertData('audioInVideo'));
         $audio_instrumental_audioInVideo = "<div>".$audio."</div>".
                 "<div>".$instrumental." ".$this->localization->getText("instrumental")."</div>".
                 "<div>".$audioInVideo." ".$this->localization->getText("audioInVideo")."</div>";
         $out .= $this->inputHelper->createFormRow($audio_instrumental_audioInVideo, false, $this->localization->getText("audio_instrumental_audioInVideo"), $this->localization->getText("loadFileOrСheck"));
         // video & noVideo
         $video = $this->inputHelper->loadFiles('video', 'video', 'video', false, false, $this->mimeType['video']);
-        $noVideo = $this->inputHelper->checkbox('noVideo', 'noVideo', 'noVideo', false, '1');
+        $noVideo = $this->inputHelper->checkbox('noVideo', 'noVideo', 'noVideo', false, '1', $this->getInsertData('noVideo'));
         $video_noVideo = "<div>".$video."</div><div>".$noVideo." ".$this->localization->getText("noVideo")."</div>";
         $video_noVideo_info = $this->localization->getText("loadFileOrСheck")."<br>".$this->localization->getText("loadFile200MB");
         $out .= $this->inputHelper->createFormRow($video_noVideo, false, $this->localization->getText("video_noVideo"), $video_noVideo_info);

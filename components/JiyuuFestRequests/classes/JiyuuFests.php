@@ -189,6 +189,15 @@ class JiyuuFests {
     
     private function getRequestsListData() {
         $query = "SELECT `request` FROM `JiyuuFestRequestUsers` WHERE `user`='".$this->yourUserData['login']."';";
+        $query = "SELECT 
+            JFR.`request`
+             FROM 
+            `JiyuuFestRequestUsers` as JFRU left Join 
+            `JiyuuFestRequest` as JFR on
+            JFRU.`request` = JFR.`request`
+            where JFRU.`user` = '".$this->yourUserData['login']."' 
+            AND JFR.`fest`='".$this->fest."'
+            ORDER BY JFR.`changed` DESC;";
         $this->requestsListData = $this->SQL_HELPER->select($query);
     }
 

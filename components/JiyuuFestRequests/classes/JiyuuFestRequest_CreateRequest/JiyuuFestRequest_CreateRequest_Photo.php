@@ -34,14 +34,72 @@ class JiyuuFestRequest_CreateRequest_Photo extends JiyuuFestRequest_CreateReques
     
     protected function apdateOthersInsertData() {
         parent::apdateOthersInsertData();
+        $this->insertData['photoTitle'] = $this->getPostValue('photoTitle');
+        $this->insertData['fendom'] = $this->getPostValue('fendom');
+        $this->insertData['characters'] = $this->getPostValue('characters');
+        $this->insertData['photographer'] = $this->getPostValue('photographer');
+        $this->insertData['photo1'] = $this->getPostValue('photo1');
+        $this->insertData['photo2'] = $this->getPostValue('photo2');
+        $this->insertData['photo3'] = $this->getPostValue('photo3');
+        $this->insertData['photo4'] = $this->getPostValue('photo4');
     }
     
     
     protected function checkOthersInsertValue() {
-        
+        $fendom = $this->checkValue('fendom');
+        $characters = $this->checkValue('characters');
+        $photographer = $this->checkValue('photographer');
+        $photo = $this->checkValue('photo1') || $this->checkValue('photo2') || $this->checkValue('photo3') || $this->checkValue('photo4');
+        return $fendom && $characters && $photographer && $photo;
     }
     
     protected function mysqlInsertOthersData() {
+        $query = "INSERT INTO `JiyuuFestRequest_Photo` SET ";
+        $query .= "`request`='".$this->requestID."', ";
+        $query .= "`photoTitle`='".$this->insertData['photoTitle']."', ";
+        $query .= "`fendom`='".$this->insertData['fendom']."', ";
+        $query .= "`characters`='".$this->insertData['characters']."', ";
+        $query .= "`photographer`='".$this->insertData['photographer']."', ";
+        $query = substr($query, 0, strlen($query)-2);
+        $query .= ';';
+        $this->SQL_HELPER->insert($query);
         
+        $this->downloadImageHelper->uploadFile('photo1', 'photo1', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->makeMiniature('photo1_s', 200, 200, 'default');
+        $photo1 = $this->downloadFileHelper->getFileName();
+        
+        $this->downloadImageHelper->uploadFile('photo2', 'photo2', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->makeMiniature('photo2_s', 200, 200, 'default');
+        $photo2 = $this->downloadFileHelper->getFileName();
+        
+        $this->downloadImageHelper->uploadFile('photo3', 'photo3', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->makeMiniature('photo3_s', 200, 200, 'default');
+        $photo3 = $this->downloadFileHelper->getFileName();
+        
+        $this->downloadImageHelper->uploadFile('photo4', 'photo4', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->makeMiniature('photo4_s', 200, 200, 'default');
+        $photo4 = $this->downloadFileHelper->getFileName();
+        
+        
+        $query = "UPDATE `JiyuuFestRequest_Photo` SET ";
+        $update = '';
+        if(file_exists($this->fileDir.$photo1)) {
+            $update .= "`photo1`='".$photo1."', ";
+        }
+        if(file_exists($this->fileDir.$photo2)) {
+            $update .= "`photo2`='".$photo2."', ";
+        }
+        if(file_exists($this->fileDir.$photo3)) {
+            $update .= "`photo3`='".$photo3."', ";
+        }
+        if(file_exists($this->fileDir.$photo4)) {
+            $update .= "`photo4`='".$photo4."', ";
+        }
+        if($update!='') {
+            $query .= $update;
+            $query = substr($query, 0, strlen($query)-2);
+            $query .= " where `request`='".$this->requestID."';";
+            $this->SQL_HELPER->insert($query);
+        }
     }
 }

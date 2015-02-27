@@ -46,7 +46,12 @@ class JiyuuFestsMain {
                                 }
                                 break;
                             case 'editRequest':
-                                $this->HTML ='изменить заявку';
+                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                    if(isset($this->URL_PARAMS[2])) {
+                                        $editeRequest = new JiyuuFestRequest_EditeRequestMain($this->URL_PARAMS[2]);
+                                        $this->HTML = $editeRequest->getHtml(); 
+                                    }
+                                }
                                 break;
                             case 'editRequestUsers':
                                 $this->HTML ='изменить заявку';

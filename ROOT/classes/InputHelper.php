@@ -1,7 +1,7 @@
 <?php
 class InputHelper {
 
-    public static function checkbox($name,$id,$class,$mandatory,$value,$JSevents=null) {
+    public static function checkbox($name,$id,$class,$mandatory,$value,$checked=null,$JSevents=null) {
         if($mandatory) {
             $required = " required ";
         } else {
@@ -10,8 +10,13 @@ class InputHelper {
         if($JSevents==null) {
             $JSevents="";
         }
+        if($checked!==null && $checked !== true && $checked !== '0' && $checked !== '') {
+            $checked = 'checked';
+        } else {
+            $checked='';
+        }
         $out = '<input type="checkbox" class="'.$class.'" name="'.$name.'" value="'.
-                $value.'" id="'.$id.'" '.
+                $value.'" id="'.$id.'" '.$checked.' '.
                 $required.' '.$JSevents.' autocomplete="off" />';
         return $out;
     }

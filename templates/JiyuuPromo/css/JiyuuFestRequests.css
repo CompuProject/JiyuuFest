@@ -316,6 +316,26 @@ table.JFRequestFormTable tr:hover td{
     background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
 }
 
+table.JFRequestFormTable td .fileExists{
+    color: #002AFF;
+    font: bold 14px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+table.JFRequestFormTable td .fileNoExists{
+    color: #e71414;
+    font: bold 14px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+
+table.JFRequestFormTable td.JFRequestFormTableRequestID {
+    background: #ef7f1a;
+    text-align: center;
+    font: bold 20px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #fff;
+    text-shadow: none;
+}
+table.JFRequestFormTable td.JFRequestFormTableRequestID:hover {
+    background: #ef7f1a;
+}
+
 table.JFRequestFormTable td.FormTable_Text {
     width: 279px;
     text-align: right;

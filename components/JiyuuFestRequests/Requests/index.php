@@ -17,6 +17,13 @@
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_CreateRequest/JiyuuFestRequest_CreateRequest_Image.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_CreateRequest/JiyuuFestRequest_CreateRequest_Photo.php';
     
+    
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequestMain.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_ActionDefile.php';
+    
+    
+    
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequest.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequestUI.php';
     $jiyuuFestsMain = new JiyuuFestsMain();
