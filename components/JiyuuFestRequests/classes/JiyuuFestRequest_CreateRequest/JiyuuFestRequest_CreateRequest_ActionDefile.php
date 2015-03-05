@@ -71,8 +71,8 @@ class JiyuuFestRequest_CreateRequest_ActionDefile extends JiyuuFestRequest_Creat
         $out .= $this->inputHelper->createFormRow($demo_audition, false, $this->localization->getText("demo_audition"), $demo_audition_info);
         // audio & instrumental & audioInVideo
         $audio = $this->inputHelper->loadFiles('audio', 'audio', 'audio', false, false, $this->mimeType['audio']);
-        $instrumental = $this->inputHelper->checkbox('instrumental', 'instrumental', 'instrumental', '1', false, $this->getInsertData('instrumental'));
-        $audioInVideo = $this->inputHelper->checkbox('audioInVideo', 'audioInVideo', 'audioInVideo', '1', false, $this->getInsertData('audioInVideo'));
+        $instrumental = $this->inputHelper->checkbox('instrumental', 'instrumental', 'instrumental', false, '1', $this->getInsertData('instrumental'));
+        $audioInVideo = $this->inputHelper->checkbox('audioInVideo', 'audioInVideo', 'audioInVideo', false, '1', $this->getInsertData('audioInVideo'));
         $audio_instrumental_audioInVideo = "<div>".$audio."</div>".
                 "<div>".$instrumental." ".$this->localization->getText("instrumental")."</div>".
                 "<div>".$audioInVideo." ".$this->localization->getText("audioInVideo")."</div>";
@@ -159,7 +159,7 @@ class JiyuuFestRequest_CreateRequest_ActionDefile extends JiyuuFestRequest_Creat
         $videoFileName = $this->downloadFileHelper->getFileName();
         $this->downloadImageHelper->uploadFile('collage', 'collage', null, null, '5MB',null,1920,1080,'default');
         $this->downloadImageHelper->makeMiniature('collage_s', 200, 200, 'default');
-        $collageFileName = $this->downloadFileHelper->getFileName();
+        $collageFileName = $this->downloadImageHelper->getFileName();
         $this->downloadFileHelper->uploadFile('explication', 'explication', null, null, '15MB');
         $explicationFileName = $this->downloadFileHelper->getFileName();
         

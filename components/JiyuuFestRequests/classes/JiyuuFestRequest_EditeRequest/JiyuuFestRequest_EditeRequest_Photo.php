@@ -1,10 +1,10 @@
 <?php
 /**
- * Description of JiyuuFestRequest_CreateRequest_Photo
+ * Description of JiyuuFestRequest_EditeRequest_Photo
  *
  * @author maxim
  */
-class JiyuuFestRequest_CreateRequest_Photo extends JiyuuFestRequest_CreateRequest {
+class JiyuuFestRequest_EditeRequest_Photo extends JiyuuFestRequest_EditeRequest {
     
     protected function generateFormInputElementsHtml() {
         $out = parent::generateFormInputElementsHtml();
@@ -25,7 +25,10 @@ class JiyuuFestRequest_CreateRequest_Photo extends JiyuuFestRequest_CreateReques
         $photo2 = $this->inputHelper->loadFiles('photo2', 'photo2', 'photo2', false, false, $this->mimeType['img']);
         $photo3 = $this->inputHelper->loadFiles('photo3', 'photo3', 'photo3', false, false, $this->mimeType['img']);
         $photo4 = $this->inputHelper->loadFiles('photo4', 'photo4', 'photo4', false, false, $this->mimeType['img']);
-        $photo = '<div>'.$photo1.'</div><div>'.$photo2.'</div><div>'.$photo3.'</div><div>'.$photo4.'</div>';
+        $photo = parent::getFileUrl('photo1').'<div>'.$photo1.'</div>'
+                .parent::getFileUrl('photo2').'<div>'.$photo2.'</div>'
+                .parent::getFileUrl('photo3').'<div>'.$photo3.'</div>'
+                .parent::getFileUrl('photo4').'<div>'.$photo4.'</div>';
         $photo_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile15MB");
         $out .= $this->inputHelper->createFormRow($photo, true, $this->localization->getText("image"), $photo_info);
         return $out;
@@ -53,29 +56,42 @@ class JiyuuFestRequest_CreateRequest_Photo extends JiyuuFestRequest_CreateReques
     }
     
     protected function mysqlInsertOthersData() {
-        $query = "INSERT INTO `JiyuuFestRequest_Photo` SET ";
-        $query .= "`request`='".$this->requestID."', ";
+        $query = "UPDATE `JiyuuFestRequest_Photo` SET ";
+//        $query .= "`request`='".$this->requestID."', ";
         $query .= "`photoTitle`='".$this->insertData['photoTitle']."', ";
         $query .= "`fendom`='".$this->insertData['fendom']."', ";
         $query .= "`characters`='".$this->insertData['characters']."', ";
         $query .= "`photographer`='".$this->insertData['photographer']."', ";
         $query = substr($query, 0, strlen($query)-2);
-        $query .= ';';
+        $query .= " WHERE `request`='".$this->requestID."';";
         $this->SQL_HELPER->insert($query);
+        parent::deletFiles();
         
-        $this->downloadImageHelper->uploadFile('photo1', 'photo1', null, null, '5MB',null,1920,1080,'default');
+//        $this->downloadFileHelper->uploadFile('photo1', 'photo1', null, null, '15MB');
+//        $photo1 = $this->downloadFileHelper->getFileName();
+//        
+//        $this->downloadFileHelper->uploadFile('photo2', 'photo2', null, null, '15MB');
+//        $photo2 = $this->downloadFileHelper->getFileName();
+//        
+//        $this->downloadFileHelper->uploadFile('photo3', 'photo3', null, null, '15MB');
+//        $photo3 = $this->downloadFileHelper->getFileName();
+//        
+//        $this->downloadFileHelper->uploadFile('photo4', 'photo4', null, null, '15MB');
+//        $photo4 = $this->downloadFileHelper->getFileName();
+        
+        $this->downloadImageHelper->uploadFile('photo1', 'photo1', null, null, '15MB',null,1920,1080,'default');
         $this->downloadImageHelper->makeMiniature('photo1_s', 200, 200, 'default');
         $photo1 = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('photo2', 'photo2', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->uploadFile('photo2', 'photo2', null, null, '15MB',null,1920,1080,'default');
         $this->downloadImageHelper->makeMiniature('photo2_s', 200, 200, 'default');
         $photo2 = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('photo3', 'photo3', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->uploadFile('photo3', 'photo3', null, null, '15MB',null,1920,1080,'default');
         $this->downloadImageHelper->makeMiniature('photo3_s', 200, 200, 'default');
         $photo3 = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('photo4', 'photo4', null, null, '5MB',null,1920,1080,'default');
+        $this->downloadImageHelper->uploadFile('photo4', 'photo4', null, null, '15MB',null,1920,1080,'default');
         $this->downloadImageHelper->makeMiniature('photo4_s', 200, 200, 'default');
         $photo4 = $this->downloadImageHelper->getFileName();
         
@@ -100,5 +116,6 @@ class JiyuuFestRequest_CreateRequest_Photo extends JiyuuFestRequest_CreateReques
             $query .= " where `request`='".$this->requestID."';";
             $this->SQL_HELPER->insert($query);
         }
+        echo $query;
     }
 }

@@ -36,35 +36,44 @@ class JiyuuFestRequest_EditeRequest {
     protected $executeSuccess = false;
     
     public function __construct($requestID) {
+        $this->requestID = $requestID;
         $this->errorBuffer = array();
         $this->localization = new Localization("JiyuuFests");
         $this->getUserData();
         if($this->yourUser->checkAuthorization()) {
             global $_SQL_HELPER;
             $this->SQL_HELPER = $_SQL_HELPER;
-            // поулчение информации
-            $this->requestID = $requestID;
-            $this->getRequestInfo();
-            $this->getFestsData();
-            $this->getRequestTypeDate();
-            $this->getOldData();
-            // Вспомогательное
-            $this->setMimeType();
-//            $this->generateRequestID();
-            $this->fileDir = $this->fileDir.$this->festsData['fest']."/".$this->requestID."/";
-            $this->urlHelper = new UrlHelper();
-            $this->inputHelper = new InputHelper();
-            $this->downloadFileHelper = new DownloadFile($this->fileDir);
-            $this->downloadImageHelper = new DownloadImage($this->fileDir);
-            // Генерация HTML
-            if(isset($_POST['JFRequestFormSubmit'])) {
-                $this->apdateInsertData();
+            if($this->checkUserForEdit()) {
+                // поулчение информации
+                $this->getRequestInfo();
+                $this->getFestsData();
+                $this->getRequestTypeDate();
+                $this->getOldData();
+                // Вспомогательное
+                $this->setMimeType();
+    //            $this->generateRequestID();
+                $this->fileDir = $this->fileDir.$this->festsData['fest']."/".$this->requestID."/";
+                $this->urlHelper = new UrlHelper();
+                $this->inputHelper = new InputHelper();
+                $this->downloadFileHelper = new DownloadFile($this->fileDir);
+                $this->downloadImageHelper = new DownloadImage($this->fileDir);
+                // Генерация HTML
+                if(isset($_POST['JFRequestFormSubmit'])) {
+                    $this->apdateInsertData();
+                }
+                $this->execute();
+                $this->generateHtml();
+            } else {
+                $this->errorBuffer[] = $this->localization->getText("ErrorPermissionDenied");
             }
-            $this->execute();
-            $this->generateHtml();
         } else {
             $this->errorBuffer[] = $this->localization->getText("ErrorUnauthorized");
         }
+    }
+    protected function checkUserForEdit() {
+        $query = "SELECT `request` FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID."' AND `user`='".$this->yourUserData['login']."' AND `confirmed`='1';";
+        $rezult = $this->SQL_HELPER->select($query);
+        return count($rezult) > 0 || $this->yourUser->isAdmin();
     }
     
     protected function getOldData() {
@@ -160,6 +169,9 @@ class JiyuuFestRequest_EditeRequest {
     }
     
     private function generateHtml() {
+//        echo '<pre>';
+//        var_dump($this->insertData);
+//        echo '</pre>';
         $this->HTML = "";
         $this->HTML .= $this->generateFestsHtml();
         if($this->executeSuccess) {
@@ -190,7 +202,7 @@ class JiyuuFestRequest_EditeRequest {
                 $out .= $this->festsData['name'];
                 $out .= '</div>';
                 $out .= '<div class="FestElementHederSendRequestButton">';
-                $out .= '<a href="'.$this->urlHelper->chengeParams(array($this->festsData['fest'],'createRequest')).'">';
+                $out .= '<a href="'.$this->urlHelper->chengeParams(array($this->festsData['fest'])).'">';
                 $out .= $this->localization->getText("BackToFest");
                 $out .= '</a>';
                 $out .= '</div>';
@@ -287,7 +299,7 @@ class JiyuuFestRequest_EditeRequest {
         $out .= '<form class="JFRequestForm" name="JFRequestForm" action="'.$this->urlHelper->getThisPage().'" enctype="multipart/form-data" method="post" accept-charset="UTF-8" autocomplete="on">';
         $out .= '<center>';
         $out .= '<table class="JFRequestFormTable" >';
-        $out .= '<tr><td colspan="2" class="JFRequestFormTableRequestID">'.$this->requestID.'</td></tr>';
+        $out .= '<tr><td colspan="2" class="JFRequestFormTableRequestID">'.$this->festsData['name'].' | '.$this->requestTypeData['name'].' | '.$this->requestID.' | '.$this->requestData['createdFor'].'</td></tr>';
         if($this->checkMayBeContest()) {
             // contest
             $contestValueArray = array();
@@ -328,6 +340,7 @@ class JiyuuFestRequest_EditeRequest {
     }
     
     private function apdateInsertData() {
+        $this->insertData = array();
         $this->insertData['deletFile'] = $this->getPostValue('deletFile');
         $this->insertData['request'] = $this->requestID;
         if($this->checkMayBeContest()) {
@@ -392,12 +405,12 @@ class JiyuuFestRequest_EditeRequest {
         $query = "UPDATE `JiyuuFestRequest` SET ";
 //        $query .= "`request`='".$this->requestID."', ";
         $query .= "`contest`='".$this->insertData['contest']."', ";
-        $query .= "`createdFor`='".$this->insertData['createdFor']."', ";
-        $query .= "`created`='".$this->insertData['created']."', ";
+//        $query .= "`createdFor`='".$this->insertData['createdFor']."', ";
+//        $query .= "`created`='".$this->insertData['created']."', ";
         $query .= "`changed`='".$this->insertData['changed']."', ";
-        $query .= "`type`='".$this->insertData['type']."', ";
-        $query .= "`fest`='".$this->insertData['fest']."', ";
-        $query .= "`status`='".$this->insertData['status']."', ";
+//        $query .= "`type`='".$this->insertData['type']."', ";
+//        $query .= "`fest`='".$this->insertData['fest']."', ";
+//        $query .= "`status`='".$this->insertData['status']."', ";
         $query .= "`numberOfParticipants`='".$this->insertData['numberOfParticipants']."', ";
         if($this->checkNecessaryDuration()) {
             $query .= "`durationMin`='".$this->insertData['durationMin']."', ";
@@ -463,7 +476,7 @@ class JiyuuFestRequest_EditeRequest {
         $file = $this->getInsertData($key);
         if($file !== null && $file != '') {
             $out .= '<div>';
-            $out .= '<span class="fileExists">'.$file.'</span>';
+            $out .= '<span class="fileExists"><a href="'.$this->fileDir.$file.'" target="_blank">Файл уже загружен</a></span>';
             $out .= ' | Удалить этот файл ';
             $out .= $this->inputHelper->checkbox("deletFile[]", 'deletFile', 'deletFile', false, $key);
             $out .= '</div>';

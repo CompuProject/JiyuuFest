@@ -27,6 +27,35 @@
     box-shadow: 0px 1px 5px rgba(0,0,0,0.7);
 }
 
+.DeleteRequestMessage {
+    font: bold 16px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-align: justify;
+    color: #fff;
+    text-shadow: none;
+    padding: 20px;
+    margin-bottom: 10px;
+    background: #ef7f1a;
+    /*background: #e71414;*/
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.7);
+}
+.DeleteRequestMessage a {
+    color: #fff;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #fff;
+}
+.DeleteRequestMessage a.delNo {
+    background: #00cf00;
+}
+.DeleteRequestMessage a.delYes {
+    background: #e71414;
+}
+.DeleteRequestMessage a:hover {
+    color: #fff;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.7);
+}
+
 .FestElementRegulationsHide .FestElementRegulationsHeder {
     text-align: center;
     font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
@@ -401,6 +430,29 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
     color: #fff;
     text-shadow: none;
     text-transform: uppercase;
+    border-right: 2px solid #fff;
+}
+.RequestElement .RequestElementHeder .RequestElementEditButton,
+.RequestElement .RequestElementHeder .RequestElementDeleteButton {
+    height: 30px;
+    width: 30px;
+    float: left;
+    font: 25px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-align: center;
+    text-shadow: none;
+    border-right: 2px solid #fff;
+    cursor: pointer;
+}
+.RequestElement .RequestElementHeder .RequestElementEditButton:hover,
+.RequestElement .RequestElementHeder .RequestElementDeleteButton:hover {
+    background: #ef7f1a;
+}
+.RequestElement .RequestElementHeder .RequestElementEditButton a, 
+.RequestElement .RequestElementHeder .RequestElementDeleteButton a {
+    display: block;
+    height: 30px;
+    width: 30px;
+    color: #fff;
 }
 
 .RequestElement .RequestElementHeder .RequestElementStatus,

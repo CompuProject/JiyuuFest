@@ -20,9 +20,17 @@
     
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequestMain.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_Karaoke.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_Dance.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_Scene.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_Defile.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_ActionDefile.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_AMV.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_VideoCosplay.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_Image.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_EditeRequest/JiyuuFestRequest_EditeRequest_Photo.php';
     
-    
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_DeleteRequest.php';
     
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequest.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequestUI.php';

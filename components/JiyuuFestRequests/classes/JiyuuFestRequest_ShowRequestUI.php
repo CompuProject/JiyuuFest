@@ -153,6 +153,10 @@ class JiyuuFestRequest_ShowRequestUI {
                 $out .= '<div class="RequestElementID">';
                 $out .= $this->mainData['request'];
                 $out .= '</div>';
+                $EDIT_URL = $this->urlHelper->chengeParams(array($this->festData['fest'],'editRequest',$this->mainData['request']));
+                $DELETE_URL = $this->urlHelper->chengeParams(array($this->festData['fest'],'deleteRequest',$this->mainData['request']));
+                $out .= '<div class="RequestElementEditButton"><a href="'.$EDIT_URL.'">&#9998;</a></div>';
+                $out .= '<div class="RequestElementDeleteButton"><a href="'.$DELETE_URL.'">&#215;</a></div>';
                 
                 $out .= '<div class="RequestElementStatus '.$this->mainData['status'].'">';
                 $out .= $this->mainData['statusName'];

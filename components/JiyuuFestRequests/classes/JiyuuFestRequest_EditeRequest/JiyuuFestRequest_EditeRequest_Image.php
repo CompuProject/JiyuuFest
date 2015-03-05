@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of JiyuuFestRequest_CreateRequest_Image
+ * Description of JiyuuFestRequest_EditeRequest_Image
  *
  * @author maxim
  */
-class JiyuuFestRequest_CreateRequest_Image extends JiyuuFestRequest_CreateRequest {
+class JiyuuFestRequest_EditeRequest_Image extends JiyuuFestRequest_EditeRequest {
     
     protected function generateFormInputElementsHtml() {
         $out = parent::generateFormInputElementsHtml();
@@ -13,7 +13,7 @@ class JiyuuFestRequest_CreateRequest_Image extends JiyuuFestRequest_CreateReques
         $imageTitle = $this->inputHelper->textBox('imageTitle', 'imageTitle', 'imageTitle', 100, true, $this->getInsertData('imageTitle'));
         $out .= $this->inputHelper->createFormRow($imageTitle, true, $this->localization->getText("imageTitle"));
         // image
-        $image = $this->inputHelper->loadFiles('image', 'image', 'image', false, false, $this->mimeType['img']);
+        $image = parent::getFileUrl('image')."<div>".$this->inputHelper->loadFiles('image', 'image', 'image', false, false, $this->mimeType['img'])."</div>";
         $image_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile15MB");
         $out .= $this->inputHelper->createFormRow($image, true, $this->localization->getText("image"), $image_info);
         return $out;
@@ -33,12 +33,13 @@ class JiyuuFestRequest_CreateRequest_Image extends JiyuuFestRequest_CreateReques
     }
     
     protected function mysqlInsertOthersData() {
-        $query = "INSERT INTO `JiyuuFestRequest_Image` SET ";
+        $query = "UPDATE `JiyuuFestRequest_Image` SET ";
         $query .= "`request`='".$this->requestID."', ";
         $query .= "`imageTitle`='".$this->insertData['imageTitle']."', ";
         $query = substr($query, 0, strlen($query)-2);
-        $query .= ';';
+        $query .= " WHERE `request`='".$this->requestID."';";
         $this->SQL_HELPER->insert($query);
+        parent::deletFiles();
         $this->downloadImageHelper->uploadFile('image', 'image', null, null, '5MB',null,1920,1080,'default');
         $this->downloadImageHelper->makeMiniature('image_s', 200, 200, 'default');
         $imageFileName = $this->downloadImageHelper->getFileName();

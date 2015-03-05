@@ -17,36 +17,37 @@ class JiyuuFestRequest_EditeRequestMain {
     private function generateUi() {
         switch ($this->requestType) {
             case 'karaoke':
-                $this->HTML = 'karaoke';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_Karaoke($this->requestID);
                 break;
             case 'dance':
-                $this->HTML = 'dance';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_Dance($this->requestID);
                 break;
             case 'scene':
-                $this->HTML = 'scene';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_Scene($this->requestID);
                 break;
             case 'defile':
-                $this->HTML = 'defile';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_Defile($this->requestID);
                 break;
             case 'action_defile':
                 $editeRequest = new JiyuuFestRequest_EditeRequest_ActionDefile($this->requestID);
-                $this->HTML = $editeRequest->getHtml();
                 break;
             case 'amv':
-                $this->HTML = 'amv';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_AMV($this->requestID);
                 break;
             case 'video_cosplay':
-                $this->HTML = 'video_cosplay';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_VideoCosplay($this->requestID);
                 break;
             case 'image':
-                $this->HTML = 'image';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_Image($this->requestID);
                 break;
             case 'photo':
-                $this->HTML = 'photo';
+                $editeRequest = new JiyuuFestRequest_EditeRequest_Photo($this->requestID);
                 break;
-            default:
-                $this->HTML = 'ERROR';
-                break;
+        }
+        if(isset($editeRequest)) {
+            $this->HTML = $editeRequest->getHtml();
+        } else {
+            $this->HTML = 'ERROR';
         }
     }
     
