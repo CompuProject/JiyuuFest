@@ -50,6 +50,8 @@ class JiyuuFestsMain {
                                     if(isset($this->URL_PARAMS[2])) {
                                         $editeRequest = new JiyuuFestRequest_EditeRequestMain($this->URL_PARAMS[2]);
                                         $this->HTML = $editeRequest->getHtml(); 
+                                    } else {
+                                        $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
                                     }
                                 }
                                 break;
@@ -60,7 +62,12 @@ class JiyuuFestsMain {
                                 $this->HTML ='изменить заявку';
                                 break;
                             case 'deleteRequest':
-                                $this->HTML ='удалить заявку';
+                                if(isset($this->URL_PARAMS[2])) {
+                                    $deleteRequest = new JiyuuFestRequest_DeleteRequest($this->URL_PARAMS[2], (isset($this->URL_PARAMS[3]) && $this->URL_PARAMS[3] == 'success'));
+                                    $this->HTML = $deleteRequest->getHtml();
+                                } else {
+                                    $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                }
                                 break;
                             case 'showApprovedRequest':
                                 $this->HTML ='показать одобренные заявки';
