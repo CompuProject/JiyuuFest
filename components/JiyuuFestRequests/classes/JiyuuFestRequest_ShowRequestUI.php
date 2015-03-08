@@ -11,6 +11,7 @@ class JiyuuFestRequest_ShowRequestUI {
 
     
     private $bannerDir = "./resources/Components/JiyuuFestRequest/JiyuuFest/banners/";
+    private $fileDir = "./resources/Components/JiyuuFestRequest/Requests/";
 
     protected $errorBuffer;
     protected $HTML;
@@ -235,6 +236,11 @@ class JiyuuFestRequest_ShowRequestUI {
                         $out .= $this->localization->getText('OriginalImage');
                     $out .= '</td>';
                 }
+                $out .= '<td class="RequestElementUsersElementData"></td>';
+                $out .= '<td class="RequestElementUsersElementData"></td>';
+                $out .= '<td class="RequestElementUsersElementData"></td>';
+                
+                
             $out .= '</tr>';
         foreach ($this->usersData as $user) {
             $out .= '<tr class="RequestElementUsersElement">';
@@ -248,28 +254,75 @@ class JiyuuFestRequest_ShowRequestUI {
                     $out .= '</td>';
                 }
                 $out .= '<td class="RequestElementUsersElementData RequestElementUsersElementNickname">';
-                $out .= '<a href="'.$this->urlHelper->pageUrl('accounts',array($this->mainData['createdFor'])).'" target="_blanck">';
+                $out .= '<a href="'.$this->urlHelper->pageUrl('accounts',array($user['nickname'])).'" target="_blanck">';
                 $out .= $user['nickname'];
                 $out .= '</a>';
                 $out .= '</td>';
                 
                 if($this->typeData['characterName']>0) {
                     $out .= '<td class="RequestElementUsersElementData RequestElementUsersElementCharacterName">';
-//                    $out .= 'fdgjh fghdsfhg dhgk jdfksg dsjgb dsfg jkdfgb dkkfs gjdf';
+                    $out .= $user['characterName'];
                     $out .= '</td>';
                 }
+                
+                $fileDir = $this->fileDir.$this->festData['fest']."/".$this->mainData['request']."/".$user['user']."/";
+                
                 if($this->typeData['photo']>0) {
                     $out .= '<td class="RequestElementUsersElementData RequestElementUsersElementPhoto">';
+                    if(file_exists($fileDir.'photo_s.jpg')) {
+                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'photo_s.jpg">';
+                    } else if(file_exists($fileDir.'photo_s.png')) {
+                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'photo_s.png">';
+                    }
                     $out .= '</td>';
                 }
                 if($this->typeData['original']>0) {
                     $out .= '<td class="RequestElementUsersElementData RequestElementUsersElementOriginal">';
+                    if(file_exists($fileDir.'original_s.jpg')) {
+                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'original_s.jpg">';
+                    } else if(file_exists($fileDir.'original_s.png')) {
+                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'original_s.png">';
+                    }
                     $out .= '</td>';
                 }
+                $out .= '<td class="RequestElementUsersElementConfirmed"><a href="javascript:alert(\'В разработке\');">&#10004;</a></td>';
+                $out .= '<td class="RequestElementUsersElementEdit"><a href="javascript:alert(\'В разработке\');">&#9998;</a></td>';
+                $out .= '<td class="RequestElementUsersElementDelete"><a href="javascript:alert(\'В разработке\');">&#215;</a></td>';
             $out .= '</tr>';
         }
+        $count = 5;
+        if($this->typeData['characterName']>0) {
+            $count++;
+        }
+        if($this->typeData['photo']>0) {
+            $count++;
+        }
+        if($this->typeData['original']>0) {
+            $count++;
+        }
+        
+        $userUm1 = $this->checkUserAmount();
+        $userUm2 = $this->mainData['numberOfParticipants'];
+        if($userUm1 < $userUm2) {
+            $out .= '<tr class="RequestElementUsersElement">';
+            $out .= '<td class="RequestElementUsersElement_AddUser" colspan="'.$count.'">';
+            $out .= '<a href="'.$this->urlHelper->chengeParams(array($this->festData['fest'],'addRequestUser',$this->mainData['request'])).'">';
+            $out .= 'Добавить пользователя  ('.$userUm1.'+1 / '.$userUm2.')';
+            $out .= '</a>';
+            $out .= '</td>';
+            $out .= '</tr>';
+        }
+        
+        
         $out .= '</table>';
         $out .= '<div class="clear"></div>';
         return $out;
+    }
+    
+    private function checkUserAmount() {
+        global $_SQL_HELPER;
+        $query = "SELECT count(`user`) as userAmount FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->mainData['request']."';";
+        $rezult = $_SQL_HELPER->select($query,1);
+        return $rezult['userAmount'];
     }
 }

@@ -32,6 +32,8 @@
     
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_DeleteRequest.php';
     
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestUsers/JiyuuFestRequestUsers_Add.php';
+    
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequest.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequestUI.php';
     $jiyuuFestsMain = new JiyuuFestsMain();

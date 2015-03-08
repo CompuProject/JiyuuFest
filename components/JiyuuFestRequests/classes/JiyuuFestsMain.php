@@ -55,6 +55,16 @@ class JiyuuFestsMain {
                                     }
                                 }
                                 break;
+                            case 'addRequestUser':
+                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                    if(isset($this->URL_PARAMS[2])) {
+                                        $user = new JiyuuFestRequestUsers_Add($this->URL_PARAMS[2]);
+                                        $this->HTML = $user->getHtml();
+                                    } else {
+                                        $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                    }
+                                }
+                                break;
                             case 'editRequestUsers':
                                 $this->HTML ='изменить заявку';
                                 break;

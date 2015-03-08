@@ -528,19 +528,21 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
     color: #1b7fcc;
 }
 
-.RequestElement .RequestElementUsers {
+
+.RequestElementUsers {
     border-collapse: collapse;
     border: 1px solid #e0e0e0;
     /*padding: 10px;*/
     max-width: 400px;
+    /*max-width: 900px;*/
     margin-right: 50px;
     float: right;
 }
-.RequestElement .RequestElementUsers .RequestElementUsersElement {
+.RequestElementUsers .RequestElementUsersElement {
     
 }
 
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData {
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData {
     font: 11px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
     border-collapse: collapse;
     border: 1px solid #e0e0e0;
@@ -548,8 +550,48 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
     text-align: center;
     vertical-align: middle;
 }
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElement_AddUser {
+    background: #00cf00;
+    color: #fff;
+    font: 16px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-align: center;
+    /*padding: 10px;*/
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElement_AddUser a {
+    /*font-weight: normal;*/
+    display: block;
+    color: #fff;
+    text-shadow: none;
+    padding: 10px;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementConfirmed,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementEdit,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementDelete {
+    font: 25px/25px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementConfirmed a,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementEdit a,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementDelete a {
+    font-weight: normal;
+    display: block;
+    width: 25px;
+    height: 25px;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementDelete a {
+    color: #e71414;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementConfirmed a {
+    color: #00cf00;
+}
 
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed {
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed {
     padding: 0px !important;
     /*font: 10px/20px helvetica,"segoe UI",arial,sans-serif;*/
     color: #fff;
@@ -557,25 +599,25 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
     height: 20px;
     text-align: center;
 }
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed.YES {
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed.YES {
     background: #00cf00;
 }
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed.NO {
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementConfirmed.NO {
     background: #e71414;
 }
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname,
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementCharacterName {
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementCharacterName {
     
 }
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto,
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal {
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal {
     padding: 0px !important;
     width: 70px;
     height: 70px;
 }
 
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto img,
-.RequestElement .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal img {
-    min-width: 70px;
-    min-height: 70px;
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto img,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal img {
+    max-width: 65px;
+    max-height: 65px;
 }
