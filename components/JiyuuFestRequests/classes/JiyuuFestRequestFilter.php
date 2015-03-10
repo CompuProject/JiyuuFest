@@ -90,7 +90,7 @@ class JiyuuFestRequestFilter {
     private function generateList() {
         $out = '';
         foreach ($this->requestIdLists as $request) {
-            $requestUI = new JiyuuFestRequest_ShowRequest($request['request']);
+            $requestUI = new JiyuuFestRequest_ShowRequest($request['request'],true);
             $out .= $requestUI->getHtml();
         }
         return $out;

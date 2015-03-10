@@ -229,7 +229,7 @@ class JiyuuFestRequest_ShowRequest {
 
     private function getInformationData_User() {
         if($this->administratorAccess) {
-             $this->requestInformationData['UserType'] = 'Admin';
+            $this->requestInformationData['UserType'] = 'Admin';
         } else {
             $query = "SELECT COUNT(`request`) AS count FROM `JiyuuFestRequest` WHERE `request`='".$this->requestID."' AND `createdFor`='".$this->yourUserData['login']."';";
             $createdForData = $this->SQL_HELPER->select($query,1);
