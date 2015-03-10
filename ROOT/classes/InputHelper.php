@@ -10,7 +10,7 @@ class InputHelper {
         if($JSevents==null) {
             $JSevents="";
         }
-        if($checked!==null && $checked !== true && $checked !== '0' && $checked !== '') {
+        if($checked!==null && $checked !== false && $checked !== '0' && $checked !== '') {
             $checked = 'checked';
         } else {
             $checked='';

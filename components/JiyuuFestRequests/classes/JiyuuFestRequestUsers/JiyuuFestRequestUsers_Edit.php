@@ -1,10 +1,10 @@
 <?php
 /**
- * Description of JiyuuFestRequestUsers_Add
+ * Description of JiyuuFestRequestUsers_Edit
  *
  * @author maxim
  */
-class JiyuuFestRequestUsers_Add {
+class JiyuuFestRequestUsers_Edit {
     // помошники
     private $SQL_HELPER;
     private $_SITECONFIG;
@@ -17,6 +17,7 @@ class JiyuuFestRequestUsers_Add {
     private $numberOfParticipants = 1;
     // данные
     private $requestID;
+    private $requestUser;
     private $festsData = array();
     private $requestTypeData = array();
     private $errorBuffer = array();
@@ -38,13 +39,15 @@ class JiyuuFestRequestUsers_Add {
     private $insertDataErrors = array();
     private $executeSuccess = false;
     
-    public function __construct($requestID) {
+    public function __construct($requestID, $user) {
         global $_SITECONFIG;
         $this->_SITECONFIG = $_SITECONFIG;
         $this->errorBuffer = array();
         $this->localization = new Localization("JiyuuFests");
         $this->urlHelper = new UrlHelper();
         $this->requestID = $requestID;
+        $this->requestUser = mb_strtolower($user, $this->_SITECONFIG->getCharset());
+        $this->requestUserData = array();
         $this->getUserData();
         if($this->authorization) {
             global $_SQL_HELPER;
@@ -53,9 +56,12 @@ class JiyuuFestRequestUsers_Add {
             $this->getFestsData();
             $this->getRequestTypeDate();
             $this->getUsersData();
+            $this->getRequestUserData();
             $this->urlHelper = new UrlHelper();
             $this->inputHelper = new InputHelper();
+            $this->fileDir = $this->fileDir.$this->fest."/".$this->requestID."/".mb_strtolower($user, $this->_SITECONFIG->getCharset())."/";
             if($this->checkUser()) {
+                $this->apdateInsertData();
                 $this->execute();
                 $this->generateHtml();
             } else {
@@ -64,6 +70,10 @@ class JiyuuFestRequestUsers_Add {
         } else {
             $this->errorBuffer[] = $this->localization->getText("ErrorUnauthorized");
         }
+    }
+    private function getRequestUserData() {
+        $query = "SELECT * FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID."' && `user`='".$this->requestUser."'";
+        $this->requestUserData = $this->SQL_HELPER->select($query,1);
     }
 
     private function getUserData() {
@@ -111,7 +121,7 @@ class JiyuuFestRequestUsers_Add {
     private function checkUser() {
         $query = "SELECT `request` FROM `JiyuuFestRequest` WHERE `request`='".$this->requestID."' AND `createdFor`='".$this->yourUserData['login']."';";
         $rezult = $this->SQL_HELPER->select($query);
-        return count($rezult) > 0 || $this->yourUser->isAdmin();
+        return count($rezult) > 0 || $this->yourUser->isAdmin() || $this->yourUserData['login'] === $this->requestUser;
     }
     
     private function generateHtml() {
@@ -223,25 +233,24 @@ class JiyuuFestRequestUsers_Add {
         $out .= '<form class="JFRequestForm" name="JFRequestForm" action="'.$this->urlHelper->getThisPage().'" enctype="multipart/form-data" method="post" accept-charset="UTF-8" autocomplete="on">';
         $out .= '<center>';
         $out .= '<table class="JFRequestFormTable" >';
-        $user = $this->inputHelper->textBox('user', 'user', 'user', 25, true, $this->getInsertData('user'));
-        $out .= $this->inputHelper->createFormRow($user, true, 'Никнейм пользователя');
+        $out .= '<tr><td colspan="2" class="JFRequestFormTableRequestID">'.$this->festsData['name'].' | '.$this->requestTypeData['name'].' | '.$this->requestID.' | '.$this->requestUser.'</td></tr>';
         if($this->requestTypeData['characterName']>0) {
             $characterName = $this->inputHelper->textBox('characterName', 'characterName', 'characterName', 100, true, $this->getInsertData('characterName'));
             $out .= $this->inputHelper->createFormRow($characterName, true, 'Персонаж;');
         }
         if($this->requestTypeData['photo']>0) {
-            $photo = $this->inputHelper->loadFiles('photo', 'photo', 'photo', false, false, $this->mimeType);
+            $photo = $this->getFileUrl('photo')."<div>".$this->inputHelper->loadFiles('photo', 'photo', 'photo', false, false, $this->mimeType)."</div>";
             $photo_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile15MB");
             $out .= $this->inputHelper->createFormRow($photo, true, 'Фотограяия костюма', $photo_info);
         }
         if($this->requestTypeData['original']>0) {
-            $original = $this->inputHelper->loadFiles('original', 'original', 'original', false, false, $this->mimeType);
+            $original = $this->getFileUrl('original')."<div>".$this->inputHelper->loadFiles('original', 'original', 'original', false, false, $this->mimeType)."</div>";
             $original_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile15MB");
             $out .= $this->inputHelper->createFormRow($original, true, 'Изображение персонажа', $original_info);
         }
         $out .= '</table>';
         $out .= '<center>';
-        $out .= '<input class="JFRequestFormButton" type="submit" name="JFRequestFormSubmit" value="Добавить участника">';
+        $out .= '<input class="JFRequestFormButton" type="submit" name="JFRequestFormSubmit" value="Применить изменения">';
         $out .= '</form>';
         return $out;
     }
@@ -259,7 +268,6 @@ class JiyuuFestRequestUsers_Add {
         if(isset($_POST['JFRequestFormSubmit']) && $_POST['JFRequestFormSubmit']!==null && $_POST['JFRequestFormSubmit']!=='') {
             if($this->checkData()) {
                 $this->createdDir();
-                $this->apdateInsertData();
                 $this->insertData();
                 $this->executeSuccess = true;
             }
@@ -267,21 +275,25 @@ class JiyuuFestRequestUsers_Add {
     }
     private function apdateInsertData() {
         $this->insertData['request'] = $this->requestID;
-        $this->insertData['user'] = $this->getPostValue('user');
+        $this->insertData['user'] = $this->requestUser;
         $this->insertData['characterName'] = $this->getPostValue('characterName');
+        $this->insertData['deletFile'] = $this->getPostValue('deletFile');
+        if($this->insertData['characterName'] === null) {
+            $this->insertData['characterName'] = $this->requestUserData['characterName'];
+        }
+        $this->insertData['photo'] = $this->requestUserData['photo'];
+        $this->insertData['original'] = $this->requestUserData['original'];
     }
     
     private function insertData() {
-        $query = "INSERT INTO `JiyuuFestRequestUsers` SET ";
-        $query .= "`request`='".$this->requestID."', ";
-        $query .= "`user`='".mb_strtolower($this->getInsertData('user'), $this->_SITECONFIG->getCharset())."', ";
         if(isset($_POST['characterName']) && $_POST['characterName']!==null && $_POST['characterName']!=='') {
-            $query .= "`characterName`='".$this->getInsertData('characterName')."', ";
+            $query = "UPDATE `JiyuuFestRequestUsers` SET `characterName`='".
+                    $this->getInsertData('characterName')."' WHERE `request` = '".
+                    $this->requestID."' AND `user` = '".$this->requestUser."'";
+            $this->SQL_HELPER->insert($query);
         }
-        $query .= "`confirmed`='1';";
-        $this->SQL_HELPER->insert($query);
+        $this->deletFiles();
         
-        $this->fileDir = $this->fileDir.$this->fest."/".$this->requestID."/".mb_strtolower($this->getInsertData('user'), $this->_SITECONFIG->getCharset())."/";
         $this->downloadFileHelper = new DownloadFile($this->fileDir);
         $this->downloadImageHelper = new DownloadImage($this->fileDir);
         
@@ -309,37 +321,35 @@ class JiyuuFestRequestUsers_Add {
         }
     }
     
+    protected function deletFiles() {
+        if(isset($this->insertData['deletFile'])) {
+            foreach ($this->insertData['deletFile'] as $deletFile) {
+                $query = "SELECT `".$deletFile."` FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID."' AND  `user`='".$this->requestUser."';";
+                $rezult = $this->SQL_HELPER->select($query,1);
+                $file = $rezult[$deletFile];
+                $file_s = $file;
+                $file_s = str_replace(".jpg", '_s.jpg', $file_s);
+                $file_s = str_replace(".JPG", '_s.JPG', $file_s);
+                $file_s = str_replace(".png", '_s.png', $file_s);
+                $file_s = str_replace(".PNG", '_s.PNG', $file_s);
+                if(file_exists($this->fileDir.$file)) {
+                    unlink($this->fileDir.$file);
+                }
+                if(file_exists($this->fileDir.$file_s)) {
+                    unlink($this->fileDir.$file_s);
+                }
+                $query = "UPDATE `JiyuuFestRequestUsers` SET `".$deletFile."`=NULL WHERE `request`='".$this->requestID."' AND  `user`='".$this->requestUser."';";
+                $this->SQL_HELPER->insert($query);
+            }
+        }
+    }
+    
     private function checkData() {
-        // пришло значение
-        $isset_user = isset($_POST['user']) && $_POST['user']!==null && $_POST['user']!=='';
-        // првоеряем есть ли место
-        $query = "SELECT count(`request`) as userAmount FROM `JiyuuFestRequest` WHERE `request`='".$this->requestID."'";
+        $query = "SELECT count(`request`) as userAmount FROM `JiyuuFestRequestUsers` WHERE `request`='".
+                $this->requestID."' AND `user`='".mb_strtolower($this->requestUser, $this->_SITECONFIG->getCharset())."'";
         $rezult = $this->SQL_HELPER->select($query,1);
-        $number = $rezult['userAmount'] < $this->numberOfParticipants;
-        // првоеряем есть ли пользователь
-        $query = "select `login` from `Users`
-            where 
-            `login`='".mb_strtolower($_POST['user'], $this->_SITECONFIG->getCharset())."';";
-        $isUser = count($this->SQL_HELPER->select($query,1));
-        // првоеряем не был ли он уже добавлен
-        $query = "SELECT count(`request`) as userAmount FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID."' AND `user`='".mb_strtolower($_POST['user'], $this->_SITECONFIG->getCharset())."'";
-        $rezult = $this->SQL_HELPER->select($query,1);
-        $noDublicate = $rezult['userAmount'] < '1';
-        
-        if(!$isset_user) {
-            $this->insertDataErrors[] = 'Неуказан логин';
-        }
-        if(!$number) {
-            $this->insertDataErrors[] = 'Все места заняты';
-        }
-        if(!$isUser) {
-            $this->insertDataErrors[] = 'Такого пользователя нет';
-        }
-        if(!$noDublicate) {
-            $this->insertDataErrors[] = 'Такой пользователь уже учавствует';
-        }
-        
-        return $isset_user && $number && $isUser && $noDublicate;
+        $issetUser = $rezult['userAmount'] > '0';
+        return $issetUser;
     }
 
 
@@ -365,6 +375,31 @@ class JiyuuFestRequestUsers_Add {
                 $_POST[$key]!==null && 
                 $_POST[$key]!=""
         ) ? $_POST[$key] : null;
+    }
+    
+    protected function getFileUrl($key) {
+        $out = '';        
+        $query = "SELECT `".$key."` FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID."' AND  `user`='".$this->requestUser."';";
+        $rezult = $this->SQL_HELPER->select($query,1);
+        $file = $rezult[$key];
+        
+        if($file !== null && $file != '') {
+            $file_s = $file;
+            $file_s = str_replace(".jpg", '_s.jpg', $file_s);
+            $file_s = str_replace(".JPG", '_s.JPG', $file_s);
+            $file_s = str_replace(".png", '_s.png', $file_s);
+            $file_s = str_replace(".PNG", '_s.PNG', $file_s);
+            $out .= '<div>';
+            $out .= '<span class="fileExists"><a href="'.$this->fileDir.$file.'" target="_blank"><img src="'.$this->fileDir.$file_s.'?q='.rand (100,999).'"></a></span>';
+            $out .= ' | Удалить этот файл ';
+            $out .= $this->inputHelper->checkbox("deletFile[]", 'deletFile', 'deletFile', false, $key);
+            $out .= '</div>';
+        } else {
+            $out .= '<div>';
+            $out .= '<span class="fileNoExists">Файл отсутствует</span>';
+            $out .= '</div>';
+        }
+        return $out;
     }
     
     public function getHtml() {

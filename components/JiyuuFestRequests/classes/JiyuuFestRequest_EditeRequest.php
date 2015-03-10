@@ -35,6 +35,8 @@ class JiyuuFestRequest_EditeRequest {
     protected $insertDataErrors = array();
     protected $executeSuccess = false;
     
+    protected $requestStatus = array();
+    
     public function __construct($requestID) {
         $this->requestID = $requestID;
         $this->errorBuffer = array();
@@ -92,6 +94,7 @@ class JiyuuFestRequest_EditeRequest {
         $this->requestData = $this->SQL_HELPER->select($query,1);
         $this->fest = $this->requestData['fest'];
         $this->requestType = $this->requestData['type'];
+        $this->requestStatus = $this->requestData['status'];
     }
 
     public function getHtml() {
@@ -293,6 +296,11 @@ class JiyuuFestRequest_EditeRequest {
     }
 
     
+    private function getRequestStatus() {
+        $query = "SELECT `status`,`name` FROM `JiyuuFestRequestStatus`";
+        $this->requestStatus = $this->SQL_HELPER->select($query);
+    }
+    
     private function generateFormHtml() {
         $out = '';
         $out .= $this->generateFormInformationHtml();
@@ -300,6 +308,16 @@ class JiyuuFestRequest_EditeRequest {
         $out .= '<center>';
         $out .= '<table class="JFRequestFormTable" >';
         $out .= '<tr><td colspan="2" class="JFRequestFormTableRequestID">'.$this->festsData['name'].' | '.$this->requestTypeData['name'].' | '.$this->requestID.' | '.$this->requestData['createdFor'].'</td></tr>';
+        if($this->yourUser->isAdmin()) {
+            $this->getRequestStatus();
+            $requestStatusData = array();
+            foreach ($this->requestStatus as $key => $status) {
+                $requestStatusData[$key]['value']=$status['status'];
+                $requestStatusData[$key]['text']=$status['name'];
+            }
+            $requestStatus = $this->inputHelper->select('status', 'status', $requestStatusData, true, $this->getInsertData('status'));
+            $out .= $this->inputHelper->createFormRow($requestStatus, true, 'Статус');
+        }
         if($this->checkMayBeContest()) {
             // contest
             $contestValueArray = array();
@@ -354,7 +372,10 @@ class JiyuuFestRequest_EditeRequest {
         $this->insertData['changed'] = $thisdate;
         $this->insertData['type'] = $this->requestType;
         $this->insertData['fest'] = $this->fest;
-        $this->insertData['status'] = 'issued';
+        $this->insertData['status'] = $this->getPostValue('status');
+        if($this->insertData['status'] === null) {
+            $this->insertData['status'] = $this->requestStatus;
+        }
         if($this->checkNecessaryNumberOfParticipants()) {
             $this->insertData['numberOfParticipants'] = $this->getPostValue('numberOfParticipants');
             if($this->insertData['numberOfParticipants']===null || $this->insertData['numberOfParticipants']==='') {
@@ -410,7 +431,9 @@ class JiyuuFestRequest_EditeRequest {
         $query .= "`changed`='".$this->insertData['changed']."', ";
 //        $query .= "`type`='".$this->insertData['type']."', ";
 //        $query .= "`fest`='".$this->insertData['fest']."', ";
-//        $query .= "`status`='".$this->insertData['status']."', ";
+        if($this->yourUser->isAdmin()) {
+            $query .= "`status`='".$this->insertData['status']."', ";
+        }
         $query .= "`numberOfParticipants`='".$this->insertData['numberOfParticipants']."', ";
         if($this->checkNecessaryDuration()) {
             $query .= "`durationMin`='".$this->insertData['durationMin']."', ";

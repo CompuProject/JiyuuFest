@@ -133,13 +133,7 @@ class JiyuuFests {
                 $out .= '<div class="clear"></div>';
                 if(count($this->requestsListData)>0) {
                     $out .= "<div class='JRequestError'>";
-                    $out .= '<div>На данный момент временно не доступно часть операций с заявками:<br>'
-                            . '- <del>удаление заявок</del>;<br>'
-                            . '- <s>редактирование заявок</s>;<br>'
-                            . '- добавление участников;<br>'
-                            . '- подробный просмотр заявок.<br><br>'
-                            . 'Данный функционал будет добавлен позже.'
-                            . '</div>';
+                    $out .= '<div>подробный просмотр заявок доступен через редактирование заявки.</div>';
                     $out .= '</div>';
                     foreach ($this->requestsListData as $request) {
                         $requestUI = new JiyuuFestRequest_ShowRequest($request['request']);

@@ -236,8 +236,10 @@ class JiyuuFestRequest_ShowRequestUI {
                         $out .= $this->localization->getText('OriginalImage');
                     $out .= '</td>';
                 }
-                $out .= '<td class="RequestElementUsersElementData"></td>';
-                $out .= '<td class="RequestElementUsersElementData"></td>';
+//                $out .= '<td class="RequestElementUsersElementData"></td>';
+                if($this->typeData['characterName']>0 && $this->typeData['photo']>0 && $this->typeData['original']>0) {
+                    $out .= '<td class="RequestElementUsersElementData"></td>';
+                }
                 $out .= '<td class="RequestElementUsersElementData"></td>';
                 
                 
@@ -285,9 +287,11 @@ class JiyuuFestRequest_ShowRequestUI {
                     }
                     $out .= '</td>';
                 }
-                $out .= '<td class="RequestElementUsersElementConfirmed"><a href="javascript:alert(\'В разработке\');">&#10004;</a></td>';
-                $out .= '<td class="RequestElementUsersElementEdit"><a href="javascript:alert(\'В разработке\');">&#9998;</a></td>';
-                $out .= '<td class="RequestElementUsersElementDelete"><a href="javascript:alert(\'В разработке\');">&#215;</a></td>';
+//                $out .= '<td class="RequestElementUsersElementConfirmed"><a href="javascript:alert(\'В разработке\');">&#10004;</a></td>';
+                if($this->typeData['characterName']>0 && $this->typeData['photo']>0 && $this->typeData['original']>0) {
+                    $out .= '<td class="RequestElementUsersElementEdit"><a href="'.$this->urlHelper->chengeParams(array($this->festData['fest'],'editRequestUsers',$this->mainData['request'],$user['user'])).'">&#9998;</a></td>';
+                }
+                $out .= '<td class="RequestElementUsersElementDelete"><a href="'.$this->urlHelper->chengeParams(array($this->festData['fest'],'deleteRequestUser',$this->mainData['request'],$user['user'])).'">&#215;</a></td>';
             $out .= '</tr>';
         }
         $count = 5;

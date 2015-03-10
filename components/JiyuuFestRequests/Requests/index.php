@@ -33,9 +33,13 @@
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_DeleteRequest.php';
     
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestUsers/JiyuuFestRequestUsers_Add.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestUsers/JiyuuFestRequestUsers_Edit.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestUsers/JiyuuFestRequestUsers_Delete.php';
     
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequest.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequestUI.php';
+    
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestFilter.php';
     $jiyuuFestsMain = new JiyuuFestsMain();
     $jiyuuFestsMain->get();
 ?>

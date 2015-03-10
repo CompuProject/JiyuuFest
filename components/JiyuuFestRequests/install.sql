@@ -293,3 +293,13 @@ CREATE TABLE IF NOT EXISTS `JiyuuFestRequest_AMV` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
+
+
+SELECT 
+JFR.`request`
+FROM `JiyuuFestRequest` as JFR 
+LEFT JOIN `JiyuuFestRequestUsers` as JFRU 
+on JFR.`request` = JFRU.`request`
+where `contest`='1'
+GROUP BY JFR.`request`

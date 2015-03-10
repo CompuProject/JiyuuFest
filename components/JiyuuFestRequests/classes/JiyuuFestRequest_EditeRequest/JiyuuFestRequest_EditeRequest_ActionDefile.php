@@ -89,11 +89,11 @@ class JiyuuFestRequest_EditeRequest_ActionDefile extends JiyuuFestRequest_EditeR
         $video_noVideo_info = $this->localization->getText("loadFileOrСheck")."<br>".$this->localization->getText("loadFile200MB");
         $out .= $this->inputHelper->createFormRow($video_noVideo, false, $this->localization->getText("video_noVideo"), $video_noVideo_info);
         // collage
-        $collage = $this->inputHelper->loadFiles('collage', 'collage', 'collage', false, false, $this->mimeType['img']);
+        $collage = parent::getFileUrl('collage')."<div>".$this->inputHelper->loadFiles('collage', 'collage', 'collage', false, false, $this->mimeType['img'])."<div>";
         $collage_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile5MB");
         $out .= $this->inputHelper->createFormRow($collage, true, $this->localization->getText("collage"), $collage_info, 'collageRow');
         // explication
-        $explication = $this->inputHelper->loadFiles('explication', 'explication', 'explication', false, false, $this->mimeType['doc']);
+        $explication = parent::getFileUrl('explication')."<div>".$this->inputHelper->loadFiles('explication', 'explication', 'explication', false, false, $this->mimeType['doc'])."<div>";
         $explication_info = $this->localization->getText("loadFile15MB");
         $out .= $this->inputHelper->createFormRow($explication, false, $this->localization->getText("explication"), $explication_info);
         return $out;

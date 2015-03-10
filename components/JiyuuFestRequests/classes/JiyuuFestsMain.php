@@ -55,6 +55,14 @@ class JiyuuFestsMain {
                                     }
                                 }
                                 break;
+                            case 'deleteRequest':
+                                if(isset($this->URL_PARAMS[2])) {
+                                    $deleteRequest = new JiyuuFestRequest_DeleteRequest($this->URL_PARAMS[2], (isset($this->URL_PARAMS[3]) && $this->URL_PARAMS[3] == 'success'));
+                                    $this->HTML = $deleteRequest->getHtml();
+                                } else {
+                                    $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                }
+                                break;
                             case 'addRequestUser':
                                 if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
                                     if(isset($this->URL_PARAMS[2])) {
@@ -65,18 +73,32 @@ class JiyuuFestsMain {
                                     }
                                 }
                                 break;
+                            case 'deleteRequestUser':
+                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                    if(isset($this->URL_PARAMS[2]) && isset($this->URL_PARAMS[3])) {
+                                        $user = new JiyuuFestRequestUsers_Delete($this->URL_PARAMS[2],$this->URL_PARAMS[3],(isset($this->URL_PARAMS[4]) && $this->URL_PARAMS[4] == 'success'));
+                                        $this->HTML = $user->getHtml();
+                                    } else {
+                                        $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                    }
+                                }
+                                break;
                             case 'editRequestUsers':
-                                $this->HTML ='изменить заявку';
+                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                    if(isset($this->URL_PARAMS[2]) && isset($this->URL_PARAMS[3])) {
+                                        $user = new JiyuuFestRequestUsers_Edit($this->URL_PARAMS[2],$this->URL_PARAMS[3]);
+                                        $this->HTML = $user->getHtml();
+                                    } else {
+                                        $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                    }
+                                }
                                 break;
-                            case 'editUsersFiles':
-                                $this->HTML ='изменить заявку';
-                                break;
-                            case 'deleteRequest':
-                                if(isset($this->URL_PARAMS[2])) {
-                                    $deleteRequest = new JiyuuFestRequest_DeleteRequest($this->URL_PARAMS[2], (isset($this->URL_PARAMS[3]) && $this->URL_PARAMS[3] == 'success'));
-                                    $this->HTML = $deleteRequest->getHtml();
+                            case 'adminpage':
+                                if ($this->yourUser->isAdmin()) {
+                                    $requestsListFromFilter = new JiyuuFestRequestFilter($this->URL_PARAMS[1]);
+                                    $this->HTML = $requestsListFromFilter->getHtml();
                                 } else {
-                                    $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                    $this->errorBuffer[] = $this->localization->getText("ErrorPermissionDenied");
                                 }
                                 break;
                             case 'showApprovedRequest':
