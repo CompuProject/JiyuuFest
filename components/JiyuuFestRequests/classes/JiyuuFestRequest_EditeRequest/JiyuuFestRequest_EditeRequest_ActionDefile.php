@@ -90,7 +90,7 @@ class JiyuuFestRequest_EditeRequest_ActionDefile extends JiyuuFestRequest_EditeR
         $out .= $this->inputHelper->createFormRow($video_noVideo, false, $this->localization->getText("video_noVideo"), $video_noVideo_info);
         // collage
         $collage = parent::getFileUrl('collage')."<div>".$this->inputHelper->loadFiles('collage', 'collage', 'collage', false, false, $this->mimeType['img'])."<div>";
-        $collage_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile5MB");
+        $collage_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile5MB")."<br><br>Поле необязательно для Ориджинал дефиле";
         $out .= $this->inputHelper->createFormRow($collage, true, $this->localization->getText("collage"), $collage_info, 'collageRow');
         // explication
         $explication = parent::getFileUrl('explication')."<div>".$this->inputHelper->loadFiles('explication', 'explication', 'explication', false, false, $this->mimeType['doc'])."<div>";

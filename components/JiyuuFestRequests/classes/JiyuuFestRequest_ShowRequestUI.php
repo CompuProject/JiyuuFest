@@ -148,11 +148,12 @@ class JiyuuFestRequest_ShowRequestUI {
     }
     
     private function generateRequestHtml() {
+        $jiyuuFestRequestCheckReview = new JiyuuFestRequestCheckReview($this->mainData['request']);
         $out = '';
         $out .= '<div class="RequestElement '.$this->mainData['request'].'">';
             $out .= '<div class="RequestElementHeder">';
                 $out .= '<div class="RequestElementID">';
-                $out .= $this->mainData['request'];
+                $out .= $this->mainData['request']." - ".$jiyuuFestRequestCheckReview->getP();
                 $out .= '</div>';
                 $EDIT_URL = $this->urlHelper->chengeParams(array($this->festData['fest'],'editRequest',$this->mainData['request']));
                 $DELETE_URL = $this->urlHelper->chengeParams(array($this->festData['fest'],'deleteRequest',$this->mainData['request']));
@@ -193,10 +194,23 @@ class JiyuuFestRequest_ShowRequestUI {
                     $out .= $this->generateRequestInformationElementHtml('duration',$duration);
                 }
             
+            $out .= $this->getSendReviewButton();
             $out .= '</div>';
             $out .= $this->generateRequestUsersBlocksHtml();
+            
+            
         $out .= '</div>';
         return $out;
+    }
+    
+    private function getSendReviewButton() {
+        if($this->mainData['status'] === 'issued' || $this->mainData['status'] === 'renew') {
+            return '<a class="FestElementSendRequestButton" href="'.
+                    $this->urlHelper->chengeParams(array($this->festData['fest'],'sendReview')).
+                    '" title="Подать на рассмотрение">Подать на рассмотрение</a>';
+        } else {
+            return '';
+        }
     }
     
     private function generateRequestInformationElementHtml($textKey,$value) {
@@ -272,18 +286,26 @@ class JiyuuFestRequest_ShowRequestUI {
                 if($this->typeData['photo']>0) {
                     $out .= '<td class="RequestElementUsersElementData RequestElementUsersElementPhoto">';
                     if(file_exists($fileDir.'photo_s.jpg')) {
-                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'photo_s.jpg">';
+                        $out .= '<a href="'.$fileDir.'photo.jpg" target="_blanck">';
+                            $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'photo_s.jpg">';
+                        $out .= '</a>';
                     } else if(file_exists($fileDir.'photo_s.png')) {
-                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'photo_s.png">';
+                        $out .= '<a href="'.$fileDir.'photo.png" target="_blanck">';
+                            $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'photo_s.png">';
+                        $out .= '</a>';
                     }
                     $out .= '</td>';
                 }
                 if($this->typeData['original']>0) {
                     $out .= '<td class="RequestElementUsersElementData RequestElementUsersElementOriginal">';
                     if(file_exists($fileDir.'original_s.jpg')) {
-                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'original_s.jpg">';
+                        $out .= '<a href="'.$fileDir.'original.jpg" target="_blanck">';
+                            $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'original_s.jpg">';
+                        $out .= '</a>';
                     } else if(file_exists($fileDir.'original_s.png')) {
-                        $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'original_s.png">';
+                        $out .= '<a href="'.$fileDir.'original.png" target="_blanck">';
+                            $out .= '<img class="RF_UserPromoIMG" src="'.$fileDir.'original_s.png">';
+                        $out .= '</a>';
                     }
                     $out .= '</td>';
                 }

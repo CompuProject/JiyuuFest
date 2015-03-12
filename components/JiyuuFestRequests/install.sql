@@ -303,3 +303,22 @@ LEFT JOIN `JiyuuFestRequestUsers` as JFRU
 on JFR.`request` = JFRU.`request`
 where `contest`='1'
 GROUP BY JFR.`request`
+
+
+
+
+SELECT 
+JFR.`status`,
+JFRT.`type`,
+JFRT.`tableName`
+FROM `JiyuuFestRequest` as JFR 
+LEFT JOIN `JiyuuFestRequestType` as JFRT 
+on JFR.`type` = JFRT.`type`
+where `request`='J15DE_BKFOALDXBSCE'
+
+
+SELECT * 
+FROM `JiyuuFestRequest` as JFR 
+LEFT JOIN `JiyuuFestRequest_Defile` as JFRT 
+on JFR.`request` = JFRT.`request`
+where JFR.`request`='J15DE_BKFOALDXBSCE'

@@ -50,6 +50,7 @@ class JiyuuFestRequest_EditeRequest_Defile extends JiyuuFestRequest_EditeRequest
 
 
     protected function generateFormInputElementsHtml() {
+        $this->getDefileTypeData();
         $out = parent::generateFormInputElementsHtml();
         // defileType
         $defileTypeArray = $this->getDefileTypeArray();
@@ -73,7 +74,6 @@ class JiyuuFestRequest_EditeRequest_Defile extends JiyuuFestRequest_EditeRequest
     
     
     protected function apdateOthersInsertData() {
-        $this->getDefileTypeData();
         parent::apdateOthersInsertData();
         $this->insertData['defileType'] = $this->getPostValue('defileType');
         $this->insertData['defileTitle'] = $this->getPostValue('defileTitle');

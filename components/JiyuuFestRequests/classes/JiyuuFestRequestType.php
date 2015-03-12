@@ -150,7 +150,7 @@ class JiyuuFestRequestType {
     private function generateRequestTypeHtml($type) {
         $out = '<div class="FestElementRequestTypeDateElement">';
             $out .= '<div class="FestElementRequestTypeDateElementName">';
-            $out .= '<a class="fancybox-doc" href="#FestElementRegulationsHide_'.$type['type'].'" title="Прпринять правила">';
+            $out .= '<a class="fancybox-doc" href="#FestElementRegulationsHide_'.$type['type'].'" title="Принять правила">';
             $out .= $type['name'];
             $out .= '</a>';
             $out .= '</div>';

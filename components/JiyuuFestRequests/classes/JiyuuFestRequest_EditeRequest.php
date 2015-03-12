@@ -48,23 +48,27 @@ class JiyuuFestRequest_EditeRequest {
             if($this->checkUserForEdit()) {
                 // поулчение информации
                 $this->getRequestInfo();
-                $this->getFestsData();
-                $this->getRequestTypeDate();
-                $this->getOldData();
-                // Вспомогательное
-                $this->setMimeType();
-    //            $this->generateRequestID();
-                $this->fileDir = $this->fileDir.$this->festsData['fest']."/".$this->requestID."/";
-                $this->urlHelper = new UrlHelper();
-                $this->inputHelper = new InputHelper();
-                $this->downloadFileHelper = new DownloadFile($this->fileDir);
-                $this->downloadImageHelper = new DownloadImage($this->fileDir);
-                // Генерация HTML
-                if(isset($_POST['JFRequestFormSubmit'])) {
-                    $this->apdateInsertData();
+                if($this->yourUser->isAdmin() || $this->requestStatus === 'issued' || $this->requestStatus === 'renew') {
+                    $this->getFestsData();
+                    $this->getRequestTypeDate();
+                    $this->getOldData();
+                    // Вспомогательное
+                    $this->setMimeType();
+        //            $this->generateRequestID();
+                    $this->fileDir = $this->fileDir.$this->festsData['fest']."/".$this->requestID."/";
+                    $this->urlHelper = new UrlHelper();
+                    $this->inputHelper = new InputHelper();
+                    $this->downloadFileHelper = new DownloadFile($this->fileDir);
+                    $this->downloadImageHelper = new DownloadImage($this->fileDir);
+                    // Генерация HTML
+                    if(isset($_POST['JFRequestFormSubmit'])) {
+                        $this->apdateInsertData();
+                    }
+                    $this->execute();
+                    $this->generateHtml();
+                } else {
+                    $this->errorBuffer[] = 'Можно редактировать только заявки которые находятся на стадии оформления.';
                 }
-                $this->execute();
-                $this->generateHtml();
             } else {
                 $this->errorBuffer[] = $this->localization->getText("ErrorPermissionDenied");
             }
@@ -178,9 +182,9 @@ class JiyuuFestRequest_EditeRequest {
         $this->HTML = "";
         $this->HTML .= $this->generateFestsHtml();
         if($this->executeSuccess) {
-//            echo '<script language="JavaScript">';
-//            echo 'window.location.href = "'.$this->urlHelper->chengeParams(array($this->fest,'showRequest',$this->requestID)).'"';
-//            echo '</script>';
+            echo '<script language="JavaScript">';
+            echo 'window.location.href = "'.$this->urlHelper->chengeParams(array($this->fest,'showRequest',$this->requestID)).'"';
+            echo '</script>';
             $showRequest = new JiyuuFestRequest_ShowRequest($this->requestID);
             $this->HTML .= $showRequest->getHtml();
         } else {

@@ -40,6 +40,12 @@
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequestUI.php';
     
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestFilter.php';
+    
+    
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestCheckReview.php';
+    
+    
+    
     $jiyuuFestsMain = new JiyuuFestsMain();
     $jiyuuFestsMain->get();
 ?>
