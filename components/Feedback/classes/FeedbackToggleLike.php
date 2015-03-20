@@ -1,4 +1,5 @@
 <?php
+include_once '../../../ROOT/classes/MySqliConnectHelper.php'; 
 include_once '../../../ROOT/classes/MysqliHelper.php'; 
 include_once '../../../ROOT/configure.php';
 ini_set("display_errors",1);
