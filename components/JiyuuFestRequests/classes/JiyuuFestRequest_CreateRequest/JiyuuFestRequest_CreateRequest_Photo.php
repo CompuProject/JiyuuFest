@@ -63,20 +63,20 @@ class JiyuuFestRequest_CreateRequest_Photo extends JiyuuFestRequest_CreateReques
         $query .= ';';
         $this->SQL_HELPER->insert($query);
         
-        $this->downloadImageHelper->uploadFile('photo1', 'photo1', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('photo1_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('photo1', 'photo1', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('photo1_s', 200, 200, 'placedIn');
         $photo1 = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('photo2', 'photo2', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('photo2_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('photo2', 'photo2', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('photo2_s', 200, 200, 'placedIn');
         $photo2 = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('photo3', 'photo3', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('photo3_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('photo3', 'photo3', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('photo3_s', 200, 200, 'placedIn');
         $photo3 = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('photo4', 'photo4', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('photo4_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('photo4', 'photo4', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('photo4_s', 200, 200, 'placedIn');
         $photo4 = $this->downloadImageHelper->getFileName();
         
         

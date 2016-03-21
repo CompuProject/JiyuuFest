@@ -68,6 +68,9 @@ class Account {
         $title = $this->login;
         if($this->isYou() || $this->isAdministrator()) {
             $title .= " (".$this->accountData['ferstName']." ".$this->accountData['lastName'].")";
+            if($this->accountData['strikes'] > 0) {
+                $title .= " страйков: ".$this->accountData['strikes']."";
+            }
         }
         $title .= $setting;
         $ROOT->setPageTitle($title);
@@ -151,7 +154,33 @@ class Account {
             $out .= '<div class="'.$this->accountData['group'].'">';
             $out .= '</div>';
         $out .= '</div>';
+        
+        $userTitle = '';
+        $accountStatus = '';
+        if($this->accountData['disable'] > 0) {
+            $accountStatus .= ' disable';
+            $userTitle .= "Пользователь заблокирован.\n\n";
+            if($this->isAdministrator()) {
+                $userTitle .= $this->accountData['disableOrDeleteComments']."\n\n";
+            }
+        }
+        if($this->accountData['delete'] > 0) {
+            $accountStatus .= ' delete';
+            $userTitle .= "Пользователь удален.\n\n";
+            if($this->isAdministrator()) {
+                $userTitle .= $this->accountData['disableOrDeleteComments']."\n\n";
+            }
+        }
+        if($this->accountData['strikes'] > 0) {
+            $accountStatus .= ' strikes';
+            $out .= '<div class="AccountStatusStrikes"></div>';
+            $userTitle .= "Ранее нарушал.\n\n";
+            if($this->isAdministrator()) {
+                $userTitle .= $this->accountData['previousViolations']."\n\n";
+            }
+        }
         $out .= '<div class="avatarBox">';
+            $out .= '<div class="AccountStatus '.$accountStatus.'" title="'.$userTitle.'"></div>';
             $out .= '<div class="avatarBlock">';
                 $out .= '<img src="'.$img.'?r='.rand().'" class="avatarIMG">';
             $out .= '</div>';

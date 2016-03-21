@@ -96,7 +96,7 @@ class MysqliHelper {
      * Деструктор класса который разрывает соединение с БД.
      */
     public function __destruct() {
-        $this->mysqli->close();
+//        $this->mysqli->close();
     }
 }
 

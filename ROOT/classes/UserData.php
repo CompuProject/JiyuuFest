@@ -31,11 +31,19 @@ class UserData {
      * @param type $pswd - пароль
      * @param type $md5 - true если пароль в md5 и false если нет
      */
-    private function getDBUserData($login) {
-        $query = "select * from `Users`
-            where 
-            `login`='".mb_strtolower($login, $this->_SITECONFIG->getCharset())."';";
+    private function getDBUserData($login,$password) {
+        $query = "SELECT * from `Users` WHERE "
+                . "(`login`='".mb_strtolower($login, $this->_SITECONFIG->getCharset())."' AND `password`='".$password."') OR "
+                . "(`email`='".mb_strtolower($login, $this->_SITECONFIG->getCharset())."' AND `password`='".$password."') OR "
+                . "(`phone`='".$this->getPhone(mb_strtolower($login, $this->_SITECONFIG->getCharset()))."' AND `password`='".$password."');";
         $this->userData = $this->SQL_HELPER->select($query,1);
+    }
+    
+    private function getPhone($phone) {
+        $s = array("(",")","-","+"," ");
+        $phone = str_replace("+7", "8", $phone);
+        $phone = str_replace($s, "", $phone);
+        return $phone;
     }
     
     /**
@@ -66,7 +74,7 @@ class UserData {
         // отменяем авторизацию
         $this->isAuthorization = false;
         // получаем данные о пользователе по указанным логину и паролю
-        $this->getDBUserData($login);
+        $this->getDBUserData($login,$password);
         // если запись найдена, то
         if($this->userData!=null) {
             if($this->userData['password']===$password) {

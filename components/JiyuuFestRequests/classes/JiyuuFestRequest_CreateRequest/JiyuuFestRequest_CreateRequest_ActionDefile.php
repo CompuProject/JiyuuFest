@@ -157,8 +157,8 @@ class JiyuuFestRequest_CreateRequest_ActionDefile extends JiyuuFestRequest_Creat
         $audioFileName = $this->downloadFileHelper->getFileName();
         $this->downloadFileHelper->uploadFile('video', 'video', null, null, '200MB');
         $videoFileName = $this->downloadFileHelper->getFileName();
-        $this->downloadImageHelper->uploadFile('collage', 'collage', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('collage_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('collage', 'collage', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('collage_s', 200, 200, 'placedIn');
         $collageFileName = $this->downloadImageHelper->getFileName();
         $this->downloadFileHelper->uploadFile('explication', 'explication', null, null, '15MB');
         $explicationFileName = $this->downloadFileHelper->getFileName();

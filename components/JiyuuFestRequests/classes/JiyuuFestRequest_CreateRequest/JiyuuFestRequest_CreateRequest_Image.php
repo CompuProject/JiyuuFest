@@ -39,8 +39,8 @@ class JiyuuFestRequest_CreateRequest_Image extends JiyuuFestRequest_CreateReques
         $query = substr($query, 0, strlen($query)-2);
         $query .= ';';
         $this->SQL_HELPER->insert($query);
-        $this->downloadImageHelper->uploadFile('image', 'image', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('image_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('image', 'image', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('image_s', 200, 200, 'placedIn');
         $imageFileName = $this->downloadImageHelper->getFileName();
         
         $query = "UPDATE `JiyuuFestRequest_Image` SET ";

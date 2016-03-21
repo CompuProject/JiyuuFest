@@ -135,7 +135,8 @@ class JiyuuFestRequest_ShowRequest {
                 $this->requestUsersData,
                 $this->requestTypeData, 
                 $this->requestExpansionData, 
-                $this->requestInformationData);
+                $this->requestInformationData,
+                $this->administratorAccess);
     }
 
     private function getMainData() {
@@ -147,7 +148,13 @@ class JiyuuFestRequest_ShowRequest {
         $query = "SELECT 
             JFRU.`request`, 
             JFRU.`user`, 
+            Us.`login`, 
             Us.`nickname`, 
+            Us.`disable`, 
+            Us.`delete`, 
+            Us.`disableOrDeleteComments`, 
+            Us.`strikes`, 
+            Us.`previousViolations`, 
             JFRU.`confirmed`, 
             JFRU.`characterName`, 
             JFRU.`photo`, 
@@ -236,7 +243,7 @@ class JiyuuFestRequest_ShowRequest {
             if($createdForData['count'] > 0) {
                  $this->requestInformationData['UserType'] = 'Creator';
             } else {
-                $query = "SELECT COUNT(`request`) AS count FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID." AND `user`='".$this->yourUserData['login']."';";
+                $query = "SELECT COUNT(`request`) AS count FROM `JiyuuFestRequestUsers` WHERE `request`='".$this->requestID."' AND `user`='".$this->yourUserData['login']."';";
                 $requestUsersData = $this->SQL_HELPER->select($query,1);
                 if($requestUsersData['count'] > 0) {
                     $this->requestInformationData['UserType'] = 'Member';

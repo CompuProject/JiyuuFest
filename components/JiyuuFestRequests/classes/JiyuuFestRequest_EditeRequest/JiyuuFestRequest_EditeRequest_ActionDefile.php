@@ -13,7 +13,8 @@ class JiyuuFestRequest_EditeRequest_ActionDefile extends JiyuuFestRequest_EditeR
         $out .= '<script type="text/javascript">';
         $out .= "var arrTypeData = {";
         foreach ($this->defileTypeData as $type) {
-            $out .= $type['type'].": {fendom: '".$type['fendom']."',collage: '".$type['collage']."'}, ";
+            //$out .= $type['type'].": {fendom: '".$type['fendom']."',collage: '".$type['collage']."'}, ";
+            $out .= $type['type'].": {fendom: '".$type['fendom']."'}, ";
         }
         $out = substr($out, 0, strlen($out)-2);
         $out .= "};";
@@ -171,8 +172,8 @@ class JiyuuFestRequest_EditeRequest_ActionDefile extends JiyuuFestRequest_EditeR
         $audioFileName = $this->downloadFileHelper->getFileName();
         $this->downloadFileHelper->uploadFile('video', 'video', null, null, '200MB');
         $videoFileName = $this->downloadFileHelper->getFileName();
-        $this->downloadImageHelper->uploadFile('collage', 'collage', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('collage_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('collage', 'collage', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('collage_s', 200, 200, 'placedIn');
         $collageFileName = $this->downloadImageHelper->getFileName();
         $this->downloadFileHelper->uploadFile('explication', 'explication', null, null, '15MB');
         $explicationFileName = $this->downloadFileHelper->getFileName();

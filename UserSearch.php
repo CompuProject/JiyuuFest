@@ -24,6 +24,14 @@ if(isset($_POST['search'])) {
     $urlHelper = new UrlHelper();
 
 
+    
+    
+    function getPhone($phone) {
+        $s = array("(",")","-","+"," ");
+        $phone = str_replace("+7", "8", $phone);
+        $phone = str_replace($s, "", $phone);
+        return $phone;
+    }
 
     $search = $_POST['search'];
     $search = addslashes($search);
@@ -34,7 +42,7 @@ if(isset($_POST['search'])) {
             exit("");
     }
     $sqlHelper = new MysqliHelper();
-    $query = "SELECT * FROM `Users` WHERE `login` LIKE '$search%' OR `ferstName` LIKE '$search%' OR `lastName` LIKE '$search%';";
+    $query = "SELECT * FROM `Users` WHERE `login` LIKE '%$search%' OR `nickname` LIKE '%$search%' OR `ferstName` LIKE '%$search%' OR `lastName` LIKE '%$search%' OR `email` LIKE '$search'  OR `phone` LIKE '".getPhone($search)."';";
     $result = $sqlHelper->select($query);
 
     'http://jiyuu-fest.ru/accounts/rus/Makson/';
@@ -50,6 +58,6 @@ if(isset($_POST['search'])) {
         }
     } else {
         echo "Нет Результатов";
-    }	
+    }
 }
 ?>      	

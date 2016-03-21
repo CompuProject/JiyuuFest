@@ -39,12 +39,12 @@
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequest.php';
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ShowRequestUI.php';
     
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ChangeStatus.php';
+    
     include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestFilter.php';
     
-    
-    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequestCheckReview.php';
-    
-    
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ProgressBar.php';
+    include_once './components/JiyuuFestRequests/classes/JiyuuFestRequest_ChangeStatusPanel.php';
     
     $jiyuuFestsMain = new JiyuuFestsMain();
     $jiyuuFestsMain->get();

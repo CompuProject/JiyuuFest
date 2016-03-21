@@ -7,10 +7,10 @@ FestEnd=Фестиваль завершен
 ShowFest=Перейти
 BackToFestList=Назад
 BackToFest=Отменить
-AgreeFestivalRules=Подавая заявку вы подтверждаете, что ознакомлены с <a class='fancybox-doc' href='#FestElementRegulationsHide' title='Правила поведения на фестивале'>правилами поведения на фестивале</a>.
-AllFestivalRules=<a class='fancybox-doc' href='#FestElementRegulationsHide' title='Правила подачи заявки и правила поведения на фестивале'>Правила подачи заявки и правила поведения на фестивале</a>.
-AgreeAndSendRequest=Я ознакомлен с правилами.
-SendRequest=Подать заявку.
+AgreeFestivalRules=Подавая заявку вы подтверждаете, что ознакомлены с <a class='fancybox-doc' href='#FestElementRegulationsHide' title='Правила поведения на фестивале'>правилами поведения на фестивале</a>
+AllFestivalRules=<a class='fancybox-doc' href='#FestElementRegulationsHide' title='Правила подачи заявки и правила поведения на фестивале'>Правила подачи заявки и правила поведения на фестивале</a>
+AgreeAndSendRequest=Я ознакомлен с правилами
+SendRequest=Подать заявку
 thisDate=Сегодня
 FestDate=Начало фестиваля
 noFestDate=дата неизвестна
@@ -46,7 +46,7 @@ from=от
 to=до
 min=мин.
 sec=сек.
-duration=Время выстепления
+duration=Время выступления
 wish=Пожелания
 loadFileOrСheck=Загрузите файл или выберите один из вариантов
 loadFileNowOrLater=Этот файл необходим для подтверждения заявки.<br>Вы можете загрузить файл сейчас или вам придется сделать это позже в режиме редактирования заявок.
@@ -79,7 +79,7 @@ musicTracks=Список использованной музыки
 programs=Список использованных программ
 amv=AMV
 videoCosplayTitle=Название видео косплея
-characters=Список персонажей<br>учавствующих в видео косплее
+characters=Список учавствующих персонажей
 videographer=Видеооператор
 video=Видеофайл
 imageTitle=Название рисунка
@@ -99,3 +99,7 @@ RequestMember=Участник
 CharacterName=Персонаж
 SuitPhoto=Фото костюма
 OriginalImage=Фото персонажа
+
+fest=Фестиваль
+RequestNotReadyForStatusTransition=Для изменения статуса заявки на указанный, требуется чтобы заявка была полностью оформлена.
+ErrorChangeStatusForOldRequest=Не доспускается изменения статуса для заявок на фестиваль, который еще не начался или уже закончился.

@@ -94,7 +94,7 @@ class JiyuuFestRequest_CreateRequest {
                 isset($_POST[$key]) && 
                 $_POST[$key]!==null && 
                 $_POST[$key]!=""
-        ) ? $_POST[$key] : null;
+        ) ? $this->SQL_HELPER->escapeString($_POST[$key]) : null;
     }
     protected function checkValue($key,$preg=null) {
         return (

@@ -75,6 +75,17 @@ class RegistrationForm {
         }
         return $this->createFormRow($input,$mandatory,$text,$info);
     }
+    
+    private function showMessage() {
+        $message = "";
+        if($this->message !== "" && $this->message !== null) {
+            $message .= '<script type="text/javascript">';
+            $message .= "alert('".strip_tags ($this->message)."')";
+            $message .= '</script>';
+            $message .= "<div class='message'>$this->message</div>";
+        }
+        return $message;
+    }
 
     /**
      * Создание формы
@@ -91,7 +102,7 @@ class RegistrationForm {
         $this->form .= '<form class="RegistrationForm" name="RegistrationForm" action="'.$urlHelper->getThisPage().'" 
             method="post" accept-charset="UTF-8" autocomplete="on">';
         $this->form .= '<center>';
-        $this->form .= "<div class='message'>$this->message</div>";
+        $this->form .=  $this->showMessage();
         $this->form .= '<table class="RegistrationFormTable" >';
         // ferstName
         $namePatern = $this->localization->getText("namePatern");
@@ -329,7 +340,7 @@ class RegistrationForm {
      */
     private function getMysqlText($text,$mysqlRealEscape=true,$br=false) {
         global $_DBSETTINGS;
-        $link = mysql_connect($_DBSETTINGS['host'], $_DBSETTINGS['user'], $_DBSETTINGS['password']) OR die(mysql_error());
+//        $link = mysql_connect($_DBSETTINGS['host'], $_DBSETTINGS['user'], $_DBSETTINGS['password']) OR die(mysql_error());
         $text = nl2br($text);
         if($br) {
             $text = strip_tags($text, '<br>');
@@ -338,7 +349,8 @@ class RegistrationForm {
         }
         $text = htmlspecialchars_decode($text);
         if($mysqlRealEscape) {
-            $text = mysql_real_escape_string($text);
+//            $text = mysql_real_escape_string($text);
+            $text = $this->SQL_HELPER->escapeString($text);
         }
         if($text=="") {
             $text = null;
@@ -399,6 +411,14 @@ class RegistrationForm {
     /**
      * Инициализация значений формы
      */
+    
+    private function getPhone($phone) {
+        $s = array("(",")","-","+"," ");
+        $phone = str_replace("+7", "8", $phone);
+        $phone = str_replace($s, "", $phone);
+        return $phone;
+    }
+    
     private function getInsertValueArray() {
         $this->insertValue = array();
         $this->insertValue['ferstName'] = $this->getPostValue('ferstName');
@@ -411,7 +431,7 @@ class RegistrationForm {
         $this->insertValue['nickname'] = $login;
         $this->insertValue['password'] = md5($this->getPostValue('password'));
         $this->insertValue['email'] = mb_strtolower($this->getPostValue('email'));
-        $this->insertValue['phone'] = $this->getPostValue('phone');
+        $this->insertValue['phone'] = $this->getPhone($this->getPostValue('phone'));
         $this->insertValue['aboutYourself'] = $this->getPostValue('aboutYourself',true,true);
         $this->insertValue['icq'] = $this->getPostValue('icq');
         $this->insertValue['skype'] = $this->getPostValue('skype');
@@ -458,6 +478,21 @@ class RegistrationForm {
         return $result['group'];
     }
     
+    private function checkUser() {
+        $query_1 = "SELECT count(`login`) as amount FROM `Users` WHERE "
+                . "`ferstName` = '".$this->insertValue['ferstName']."' AND "
+                . "`lastName` = '".$this->insertValue['lastName']."' AND "
+                . "`birthday` = '".$this->insertValue['birthday']."';";
+        $query_2 = "SELECT count(`login`) as amount FROM `Users` WHERE "
+                . "`email` = '".$this->insertValue['email']."';";
+        $query_3 = "SELECT count(`login`) as amount FROM `Users` WHERE "
+                . "`phone` LIKE '".$this->insertValue['phone']."';";
+        $rez_1 = $this->SQL_HELPER->select($query_1,1);
+        $rez_2 = $this->SQL_HELPER->select($query_2,1);
+        $rez_3 = $this->SQL_HELPER->select($query_3,1);
+        return $rez_1['amount'] < 1 && $rez_2['amount'] < 1 && $rez_3['amount'] < 1;
+    }
+    
     /**
      * вставка 
      */
@@ -467,21 +502,25 @@ class RegistrationForm {
                 if($this->checkEmail()) {
                     if($this->checkRepeatPassword()) {
                         if($this->checkAllValue()) {
-                            $insertSQL = $this->getQuery();
-//                            echo $insertSQL;
-                            if($this->SQL_HELPER->insert($insertSQL)) {
-    //                            if($this->sendUserActivateMail()) {
-                                    $this->clearInsertValueArray();
-                                    $this->message = "Ваш пользователь был успешно создан.";
-    //                                $this->message = $this->localization->getText("insertOK");
-    //                            } else {
-    //                                $query = "DELETE FROM `Users` WHERE `login` = '".$this->insertValue['login']."';";
-    //                                $this->agreementsData = $this->SQL_HELPER->select($query);
-    //                                $this->message = $this->localization->getText("mailError");
-    //                            }
+                            if($this->checkUser()) {
+                                $insertSQL = $this->getQuery();
+    //                            echo $insertSQL;
+                                if($this->SQL_HELPER->insert($insertSQL)) {
+        //                            if($this->sendUserActivateMail()) {
+                                        $this->clearInsertValueArray();
+                                        $this->message = "Ваш пользователь был успешно создан.";
+        //                                $this->message = $this->localization->getText("insertOK");
+        //                            } else {
+        //                                $query = "DELETE FROM `Users` WHERE `login` = '".$this->insertValue['login']."';";
+        //                                $this->agreementsData = $this->SQL_HELPER->select($query);
+        //                                $this->message = $this->localization->getText("mailError");
+        //                            }
+                                } else {
+                                    $this->message = $this->reportError($insertSQL);
+                                    $this->message .= $this->localization->getText("dbError");
+                                }
                             } else {
-                                $this->message = $this->reportError($insertSQL);
-                                $this->message .= $this->localization->getText("dbError");
+                                $this->message = $this->localization->getText("duplicatePage")."<br>";
                             }
                         } else {
                             $this->message = $this->localization->getText("checkAllValueFalse")."<br>";
@@ -597,7 +636,7 @@ class RegistrationForm {
     public function show() {
         if($this->params!=null && count($this->params)==2) {
             $this->activateUser();
-            echo "<center><div class='message'>$this->message</div></center>";
+            echo $this->showMessage();
         } else {
             if(isset($_POST['RegistrationFormSubmit'])) {
                 $this->getInsertValueArray();

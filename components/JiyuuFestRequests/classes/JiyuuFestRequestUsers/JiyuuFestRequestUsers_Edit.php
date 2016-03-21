@@ -241,7 +241,7 @@ class JiyuuFestRequestUsers_Edit {
         if($this->requestTypeData['photo']>0) {
             $photo = $this->getFileUrl('photo')."<div>".$this->inputHelper->loadFiles('photo', 'photo', 'photo', false, false, $this->mimeType)."</div>";
             $photo_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile15MB");
-            $out .= $this->inputHelper->createFormRow($photo, true, 'Фотограяия костюма', $photo_info);
+            $out .= $this->inputHelper->createFormRow($photo, true, 'Фотография костюма', $photo_info);
         }
         if($this->requestTypeData['original']>0) {
             $original = $this->getFileUrl('original')."<div>".$this->inputHelper->loadFiles('original', 'original', 'original', false, false, $this->mimeType)."</div>";
@@ -297,12 +297,12 @@ class JiyuuFestRequestUsers_Edit {
         $this->downloadFileHelper = new DownloadFile($this->fileDir);
         $this->downloadImageHelper = new DownloadImage($this->fileDir);
         
-        $this->downloadImageHelper->uploadFile('photo', 'photo', null, null, '5MB');
-        $this->downloadImageHelper->makeMiniature('photo_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('photo', 'photo', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('photo_s', 200, 200, 'placedIn');
         $photoFileName = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('original', 'original', null, null, '5MB');
-        $this->downloadImageHelper->makeMiniature('original_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('original', 'original', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('original_s', 200, 200, 'placedIn');
         $originalFileName = $this->downloadImageHelper->getFileName();
         
         $query = "UPDATE `JiyuuFestRequestUsers` SET ";

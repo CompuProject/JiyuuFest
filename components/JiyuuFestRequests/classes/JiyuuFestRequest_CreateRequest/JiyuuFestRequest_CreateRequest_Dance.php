@@ -64,7 +64,9 @@ class JiyuuFestRequest_CreateRequest_Dance extends JiyuuFestRequest_CreateReques
         $query = "INSERT INTO `JiyuuFestRequest_Dance` SET ";
         $query .= "`request`='".$this->requestID."', ";
         $query .= "`danceTitle`='".$this->insertData['danceTitle']."', ";
-        $query .= "`kosbend`='".$this->insertData['kosbend']."', ";
+        if($this->insertData['kosbend']!==null && $this->insertData['kosbend']!='') {
+            $query .= "`kosbend`='".$this->insertData['kosbend']."', ";
+        }
         if($this->insertData['audition']!==null && $this->insertData['audition']!='') {
             $query .= "`audition`='".$this->insertData['audition']."', ";
         }
@@ -80,6 +82,8 @@ class JiyuuFestRequest_CreateRequest_Dance extends JiyuuFestRequest_CreateReques
         $query = substr($query, 0, strlen($query)-2);
         $query .= ';';
         $this->SQL_HELPER->insert($query);
+        
+        
         $this->downloadFileHelper->uploadFile('demo', 'demo', null, null, '200MB');
         $demoFileName = $this->downloadFileHelper->getFileName();
         $this->downloadFileHelper->uploadFile('audio', 'audio', null, null, '15MB');

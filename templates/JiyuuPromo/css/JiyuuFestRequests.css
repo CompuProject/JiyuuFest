@@ -418,7 +418,8 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
 .RequestElement .RequestElementHeder {
     background-color: #7ea4ee;
     height: 30px;
-    margin-bottom: 25px;
+    /*margin-bottom: 25px;*/
+    margin-bottom: 2px;
 }
 
 .RequestElement .RequestElementHeder .RequestElementID {
@@ -500,6 +501,7 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
 .RequestElement .RequestElementInformation {
     float: left;
     width: 500px;
+    margin-top: 25px;
 }
 
 .RequestElement .RequestElementInformation .RequestElementInformationElement {
@@ -536,6 +538,7 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
     max-width: 400px;
     /*max-width: 900px;*/
     margin-right: 50px;
+    margin-top: 25px;
     float: right;
 }
 .RequestElementUsers .RequestElementUsersElement {
@@ -609,6 +612,27 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
 .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementCharacterName {
     
 }
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.disable,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.delete {
+    background: #cc3333;
+    color: #FFFFFF;
+    text-shadow: none;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.disable a,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.delete a {
+    color: #FFFFFF;
+    text-shadow: none;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.disable a:hover,
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.delete a:hover {
+    color: #FFFFFF;
+    text-shadow: none;
+}
+.RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementNickname.delete {
+    text-decoration:line-through
+}
+
+
 .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementPhoto,
 .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal {
     padding: 0px !important;
@@ -620,4 +644,120 @@ table.JFRequestFormTable td.FormTable_Input textarea.wish {
 .RequestElementUsers .RequestElementUsersElement .RequestElementUsersElementData.RequestElementUsersElementOriginal img {
     max-width: 65px;
     max-height: 65px;
+}
+
+.JiyuuFestRequestProgressBarWrapper {
+    margin-left: 100px;
+    width: 200px;
+}
+.JiyuuFestRequestProgressBar {
+    position: relative;
+}
+.JiyuuFestRequestProgressBar .JiyuuFestRequestProgressBarRuler {
+    height: 20px;
+    /*width: 200px;*/
+    background: #e71414;
+    cursor: pointer;
+}
+.JiyuuFestRequestProgressBar .JiyuuFestRequestProgressBarRuler .JiyuuFestRequestProgressBarRulerMark {
+    height: 20px;
+    background: #00cf00;
+    float: left;
+}
+.JiyuuFestRequestProgressBar .JiyuuFestRequestProgressBarValue {
+    display: none;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    color: #fff;
+    font: 14px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    background: rgba(0,0,0,.3);
+    text-align: center;
+    cursor: pointer;
+}
+.JiyuuFestRequestProgressBar:hover .JiyuuFestRequestProgressBarValue {
+    display:block;
+}
+.JiyuuFestRequestProgressBarStatistics {
+    width: 200px;
+}
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarErrors {}
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarRecommendations {}
+
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarErrors .JiyuuFestRequestProgressBarErrorsButton,
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarRecommendations .JiyuuFestRequestProgressBarRecommendationsButton {
+    width: 110px;
+    height: 20px;
+    background-color: #7ea4ee;
+    border-radius: 5px;
+    margin: 5px auto;
+}
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarErrors .JiyuuFestRequestProgressBarErrorsButton a,
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarRecommendations .JiyuuFestRequestProgressBarRecommendationsButton a {
+    display: block;
+    width: 110px;
+    height: 20px;
+    text-decoration: none;
+    font: bold 12px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #fff;
+    text-shadow: none;
+    text-align: center;
+}
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarErrors .JiyuuFestRequestProgressBarErrorsButton a:hover,
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarRecommendations .JiyuuFestRequestProgressBarRecommendationsButton a:hover {
+    background: #1b7fcc;
+}
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarRecommendations .JiyuuFestRequestProgressBarRecommendationsList,
+.JiyuuFestRequestProgressBarStatistics .JiyuuFestRequestProgressBarErrors .JiyuuFestRequestProgressBarErrorsList {
+    display: none;
+}
+
+.JiyuuFestRequestProgressBarRecommendationsList {
+    min-width: 400px;
+}
+.JiyuuFestRequestProgressBarRecommendationsList .JiyuuFestRequestProgressBarRecommendationsListElements {
+    list-style: disc url('../img/RecommendationsIcon.png') inside;
+}
+.JiyuuFestRequestProgressBarErrorsList .JiyuuFestRequestProgressBarErrorsListElements {
+    list-style: disc url('../img/ErrorIcon.png') inside;
+}
+.JiyuuFestRequestProgressBarRecommendationsList .JiyuuFestRequestProgressBarRecommendationsListElements .JiyuuFestRequestProgressBarRecommendationsListElement,
+.JiyuuFestRequestProgressBarErrorsList .JiyuuFestRequestProgressBarErrorsListElements .JiyuuFestRequestProgressBarErrorsListElement {
+    font: 14px/16px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+.RequestChangeStatusPanel {
+    /*margin-bottom: 25px;*/
+    background: #7ea4ee;
+}
+.RequestChangeStatusPanel .RequestChangeStatusPanelBotton {
+    float: right;
+    /*border-right: 2px solid #fff;*/
+    border-left: 2px solid #fff;
+}
+.RequestChangeStatusPanel .RequestChangeStatusPanelBotton a {
+    display: block;
+    height: 20px;
+    text-decoration: none;
+    font: bold 12px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #fff;
+    text-shadow: none;
+    text-align: center;
+    padding: 0px 5px;
+    background: #7ea4ee;
+}
+.RequestChangeStatusPanel .RequestChangeStatusPanelBotton a:hover {
+    background: #1b7fcc;
+}
+
+#AddUserRezult .searchUserResultElement {
+    border: 1px #bfbfbf solid;
+    font: bold 15px/15px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    cursor: pointer;
+}
+#AddUserRezult .searchUserResultElement:hover {
+    background: #bfbfbf;
 }

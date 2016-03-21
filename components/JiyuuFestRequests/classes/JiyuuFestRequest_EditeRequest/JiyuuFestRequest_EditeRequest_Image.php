@@ -40,8 +40,8 @@ class JiyuuFestRequest_EditeRequest_Image extends JiyuuFestRequest_EditeRequest 
         $query .= " WHERE `request`='".$this->requestID."';";
         $this->SQL_HELPER->insert($query);
         parent::deletFiles();
-        $this->downloadImageHelper->uploadFile('image', 'image', null, null, '5MB',null,1920,1080,'default');
-        $this->downloadImageHelper->makeMiniature('image_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('image', 'image', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('image_s', 200, 200, 'placedIn');
         $imageFileName = $this->downloadImageHelper->getFileName();
         
         $query = "UPDATE `JiyuuFestRequest_Image` SET ";

@@ -65,6 +65,27 @@ class JiyuuFestRequestUsers_Add {
             $this->errorBuffer[] = $this->localization->getText("ErrorUnauthorized");
         }
     }
+    
+    private function getAjax() {
+        $out = '<script type="text/javascript">';
+        $out .= '$(function() {';
+        $out .= '        $("#AddUserInput").keyup(function(){';
+        $out .= '                var search = $("#AddUserInput").val();';
+        $out .= '                $.ajax({';
+        $out .= '                        type: "POST",';
+        $out .= '                        url: "./components/JiyuuFestRequests/scripts/AddUserForInput.php",';
+        $out .= '                        data: {"SearchUser": search},';
+        $out .= '                        cache: false,';				
+        $out .= '                        success: function(response){';
+        $out .= '                                $("#AddUserRezult").html(response);';
+        $out .= '                        }';
+        $out .= '                });';
+        $out .= '                return false;';
+        $out .= '        });';
+        $out .= '});';
+        $out .= '</script>';
+        return $out;
+    }
 
     private function getUserData() {
         $this->yourUser = new UserData();
@@ -223,8 +244,10 @@ class JiyuuFestRequestUsers_Add {
         $out .= '<form class="JFRequestForm" name="JFRequestForm" action="'.$this->urlHelper->getThisPage().'" enctype="multipart/form-data" method="post" accept-charset="UTF-8" autocomplete="on">';
         $out .= '<center>';
         $out .= '<table class="JFRequestFormTable" >';
-        $user = $this->inputHelper->textBox('user', 'user', 'user', 25, true, $this->getInsertData('user'));
-        $out .= $this->inputHelper->createFormRow($user, true, 'Никнейм пользователя');
+        $user = $this->inputHelper->textBox('user', 'AddUserInput', 'user', 25, true, $this->getInsertData('user'));
+        $user .= "<div id='AddUserRezult'></div>";
+        
+        $out .= $this->inputHelper->createFormRow($user, true, 'Идентификатор пользователя');
         if($this->requestTypeData['characterName']>0) {
             $characterName = $this->inputHelper->textBox('characterName', 'characterName', 'characterName', 100, true, $this->getInsertData('characterName'));
             $out .= $this->inputHelper->createFormRow($characterName, true, 'Персонаж;');
@@ -232,7 +255,7 @@ class JiyuuFestRequestUsers_Add {
         if($this->requestTypeData['photo']>0) {
             $photo = $this->inputHelper->loadFiles('photo', 'photo', 'photo', false, false, $this->mimeType);
             $photo_info = $this->localization->getText("loadFileNowOrLater")."<br><br>".$this->localization->getText("loadFile15MB");
-            $out .= $this->inputHelper->createFormRow($photo, true, 'Фотограяия костюма', $photo_info);
+            $out .= $this->inputHelper->createFormRow($photo, true, 'Фотография костюма', $photo_info);
         }
         if($this->requestTypeData['original']>0) {
             $original = $this->inputHelper->loadFiles('original', 'original', 'original', false, false, $this->mimeType);
@@ -243,6 +266,7 @@ class JiyuuFestRequestUsers_Add {
         $out .= '<center>';
         $out .= '<input class="JFRequestFormButton" type="submit" name="JFRequestFormSubmit" value="Добавить участника">';
         $out .= '</form>';
+        $out .= $this->getAjax();
         return $out;
     }
 
@@ -285,12 +309,12 @@ class JiyuuFestRequestUsers_Add {
         $this->downloadFileHelper = new DownloadFile($this->fileDir);
         $this->downloadImageHelper = new DownloadImage($this->fileDir);
         
-        $this->downloadImageHelper->uploadFile('photo', 'photo', null, null, '5MB');
-        $this->downloadImageHelper->makeMiniature('photo_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('photo', 'photo', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('photo_s', 200, 200, 'placedIn');
         $photoFileName = $this->downloadImageHelper->getFileName();
         
-        $this->downloadImageHelper->uploadFile('original', 'original', null, null, '5MB');
-        $this->downloadImageHelper->makeMiniature('original_s', 200, 200, 'default');
+        $this->downloadImageHelper->uploadFile('original', 'original', null, null, '5MB',null,1920,1080,'placedIn');
+        $this->downloadImageHelper->makeMiniature('original_s', 200, 200, 'placedIn');
         $originalFileName = $this->downloadImageHelper->getFileName();
         
         $query = "UPDATE `JiyuuFestRequestUsers` SET ";

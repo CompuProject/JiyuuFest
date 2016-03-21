@@ -111,7 +111,6 @@ class AccountSettings {
                 echo '<script language="JavaScript">';
                 echo 'window.location.href = "'.$this->urlHelper->getThisPage().'"';
                 echo '</script>';
-
             }
             $out .= '<div id="changeImageBox" class="changeImageBox" style="display: none;">';
                 $out .= '<div class="changeImageConteiner">';
@@ -230,6 +229,10 @@ class AccountSettings {
         $out .= '<center>';
         $out .= "<div class='message'>$this->message</div>";
         $out .= '<table class="EditUserDataFormTable" >';
+        // nickname
+        $loginAndPasswordPatern = "loginAndPasswordPatern";
+        $nickname = $this->inputHelper->paternTextBox("nickname", "nickname", "nickname", 25, true, $this->localization->getText($loginAndPasswordPatern), "[A-Za-z0-9]{3,20}", $this->userData['nickname']);
+        $out .= $this->createLocalizationFormRow($nickname, true, 'nickname',$loginAndPasswordPatern);
         // ferstName
         $namePatern = $this->localization->getText("namePatern");
         $ferstName = $this->inputHelper->paternTextBox("ferstName", "ferstName", "ferstName", 50, true, $namePatern, "[А-Яа-яЁёA-Za-z]{2,50}", $this->userData['ferstName']);
@@ -338,6 +341,7 @@ class AccountSettings {
      */
     private function checkAllValue() {
         return (
+                $this->checkValue('nickname',"/^[A-Za-z0-9]{3,25}+$/u") && 
                 $this->checkValue('ferstName',"/[^А-ЯA-Z]{1}[а-яa-z]{1,49}+$/u") && 
                 $this->checkValue('lastName',"/[^А-ЯA-Z]{1}[а-яa-z]{1,49}+$/u") && 
                 $this->checkValue('city',"/[^А-ЯA-Z]{1}[а-яa-z]{1,199}+$/u") && 
@@ -389,7 +393,7 @@ class AccountSettings {
      */
     private function getMysqlText($text,$mysqlRealEscape=true,$br=false) {
         global $_DBSETTINGS;
-        $link = mysql_connect($_DBSETTINGS['host'], $_DBSETTINGS['user'], $_DBSETTINGS['password']) OR die(mysql_error());
+//        $link = mysql_connect($_DBSETTINGS['host'], $_DBSETTINGS['user'], $_DBSETTINGS['password']) OR die(mysql_error());
         $text = nl2br($text);
         if($br) {
             $text = strip_tags($text, '<br>');
@@ -398,7 +402,8 @@ class AccountSettings {
         }
         $text = htmlspecialchars_decode($text);
         if($mysqlRealEscape) {
-            $text = mysql_real_escape_string($text);
+//            $text = mysql_real_escape_string($text);
+            $text = $this->SQL_HELPER->escapeString($text);
         }
         if($text=="") {
             $text = null;
@@ -419,18 +424,26 @@ class AccountSettings {
         ) ? $this->getMysqlText($_POST[$key],$mysqlRealEscape=true,$br=false) : null;
     }
     
+    private function getPhone($phone) {
+        $s = array("(",")","-","+"," ");
+        $phone = str_replace("+7", "8", $phone);
+        $phone = str_replace($s, "", $phone);
+        return $phone;
+    }
+    
     /**
      * Инициализация значений формы
      */
     private function getInsertValueArray() {
         $this->updateValue = array();
+        $this->updateValue['nickname'] = $this->getPostValue('nickname');
         $this->updateValue['ferstName'] = $this->getPostValue('ferstName');
         $this->updateValue['lastName'] = $this->getPostValue('lastName');
         $this->updateValue['birthday'] = $this->getPostValue('birthday');
         $this->updateValue['sex'] = $this->getPostValue('sex');
         $this->updateValue['city'] = $this->getPostValue('city');
         $this->updateValue['email'] = $this->getPostValue('email');
-        $this->updateValue['phone'] = $this->getPostValue('phone');
+        $this->updateValue['phone'] = $this->getPhone($this->getPostValue('phone'));
         $this->updateValue['status'] = $this->getPostValue('status');
         $this->updateValue['aboutYourself'] = $this->getPostValue('aboutYourself');
         $this->updateValue['icq'] = $this->getPostValue('icq');
@@ -447,6 +460,23 @@ class AccountSettings {
         $this->updateValue['siteName'] = $this->getPostValue('siteName');
         $this->updateValue['siteUrl'] = $this->getPostValue('siteUrl');
     }
+    private function checkUser() {
+        $query_1 = "SELECT count(`login`) as amount FROM `Users` WHERE "
+                . "`ferstName` = '".$this->updateValue['ferstName']."' AND "
+                . "`lastName` = '".$this->updateValue['lastName']."' AND "
+                . "`birthday` = '".$this->updateValue['birthday']."' AND "
+                . "`login` != '".$this->userData['login']."';";
+        $query_2 = "SELECT count(`login`) as amount FROM `Users` WHERE "
+                . "`email` = '".$this->updateValue['email']."' AND "
+                . "`login` != '".$this->userData['login']."';";
+        $query_3 = "SELECT count(`login`) as amount FROM `Users` WHERE "
+                . "`phone` LIKE '".$this->updateValue['phone']."' AND "
+                . "`login` != '".$this->userData['login']."';";
+        $rez_1 = $this->SQL_HELPER->select($query_1,1);
+        $rez_2 = $this->SQL_HELPER->select($query_2,1);
+        $rez_3 = $this->SQL_HELPER->select($query_3,1);
+        return $rez_1['amount'] < 1 && $rez_2['amount'] < 1 && $rez_3['amount'] < 1;
+    }
     
     private function updateData() {
         if($this->checkCaptcha()) {
@@ -455,13 +485,17 @@ class AccountSettings {
                 //echo "3";
                 if($this->checkAllValue()) {
                     //echo "4";
-                    if($this->SQL_HELPER->insert($this->getQuery())) {
-                        $this->message = $this->localization->getText("updateOK");
-                        echo '<script language="JavaScript">';
-                        echo 'window.location.href = "'.$this->urlHelper->getThisPage().'"';
-                        echo '</script>';
+                    if($this->checkUser()) {
+                        if($this->SQL_HELPER->insert($this->getQuery())) {
+                            $this->message = $this->localization->getText("updateOK");
+                            echo '<script language="JavaScript">';
+                            echo 'window.location.href = "'.$this->urlHelper->getThisPage().'"';
+                            echo '</script>';
+                        } else {
+                            $this->message = $this->localization->getText("duplicatePage");
+                        }
                     } else {
-                        $this->message = $this->localization->getText("dbError");
+                        $this->message = $this->localization->getText("checkAllValueFalse");
                     }
                 } else {
                     $this->message = $this->localization->getText("checkAllValueFalse");
@@ -474,12 +508,15 @@ class AccountSettings {
         }
     }
 
-public function getChangePasswordForm() {
+    public function getChangePasswordForm() {
         if (isset($_POST['changePasswordFormSubmit'])) {
             $this->updatePassword();
         }
         $form = '<form class="changePasswordForm" name="RegistrationForm" action="'.$this->urlHelper->getThisPage().'" 
             method="post" accept-charset="UTF-8" autocomplete="on">';
+        $form .= '<script type="text/javascript">';
+        $form .= "alert('".strip_tags ($this->message)."')";
+        $form .= '</script>';
         $form .= "<div class='message'>$this->message</div>";
         $form .= '<table class="changePasswordFormTable" >';
         $loginAndPasswordPatern = "loginAndPasswordPatern";

@@ -10,24 +10,26 @@ class JiyuuFestRequestFilter {
     private $localization;
     private $urlHelper;
     
-    private $fest;
     private $filterData;
     private $requestType;
     private $requestStatus;
+    private $fests;
     private $requestIdLists;
     
     private $errorBuffer;
+    private $fest;
     private $HTML;
     
-    public function __construct($fest) {
+    public function __construct($fest = null) {
+        $this->fest = $fest;
         global $_SQL_HELPER;
         $this->SQL_HELPER = $_SQL_HELPER;
-        $this->fest = $fest;
         $this->errorBuffer = array();
         $this->inputHelper = new InputHelper();
         $this->localization = new Localization("JiyuuFests");
         $this->urlHelper = new UrlHelper();
         $this->getRequestType();
+        $this->getAllFest();
         $this->getRequestStatus();
         $this->getAllFilterData();
         $this->getRequestIdLists();
@@ -35,6 +37,7 @@ class JiyuuFestRequestFilter {
     }
     
     private function getAllFilterData() {
+        $this->filterData['fest'] = $this->getFilterData('fest');
         $this->filterData['contest'] = $this->getFilterData('contest');
         $this->filterData['requestType'] = $this->getFilterData('requestType');
         $this->filterData['requestStatus'] = $this->getFilterData('requestStatus');
@@ -50,6 +53,11 @@ class JiyuuFestRequestFilter {
             on JFR.`request` = JFRU.`request`";
         
         $filter = '';
+        if($this->fest !== null) {
+            $filter .= "JFR.`fest`='".$this->fest."' AND ";
+        } else if($this->filterData['fest'] !== 'all') {
+            $filter .= "JFR.`fest`='".$this->filterData['fest']."' AND ";
+        }
         if($this->filterData['contest'] !== 'all') {
             $filter .= "JFR.`contest`='".$this->filterData['contest']."' AND ";
         }
@@ -95,12 +103,27 @@ class JiyuuFestRequestFilter {
         }
         return $out;
     }
+    
+    private function getAllFest() {
+        $query = "SELECT `fest`, `code`, `name` FROM `JiyuuFest`;";
+        $this->fests = $this->SQL_HELPER->select($query);
+    }
 
     private function generateFilter() {
         $out = '';
         $out .= '<form class="JFRequestForm" name="JFRequestForm" action="'.$this->urlHelper->getThisPage().'" enctype="multipart/form-data" method="post" accept-charset="UTF-8" autocomplete="on">';
         $out .= '<center>';
         $out .= '<table class="JFRequestFormTable" >';
+        if($this->fest === null) {
+            $festsArray = array(array('value' => 'all', 'text' => 'Не важно'));
+            foreach ($this->fests as $key => $festVal) {
+                $tempSelectArray['value'] = $festVal['fest'];
+                $tempSelectArray['text'] = $festVal['name'];
+                $festsArray[] = $tempSelectArray;
+            }
+            $fest = $this->inputHelper->select('fest', 'fest', $festsArray, true, $this->getFilterData('fest'));
+            $out .= $this->inputHelper->createFormRow($fest, true, $this->localization->getText("fest"));
+        }
         $contestValueArray = array();
         $contestValueArray[0]['value']='all';
         $contestValueArray[0]['text']='Не важно';

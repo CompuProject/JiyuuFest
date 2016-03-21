@@ -16,10 +16,31 @@
     background: url('../img/accountGroup/Administrator.png') no-repeat;
     width: 50px;
     height: 33px;
-    //z-index: 6;
+    /*z-index: 6;*/
     top: -5px;
     left: 105px;
 }
+.AccountStatus {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    top: 30px;
+    left: 30px;
+    z-index: 10;
+}
+.AccountStatus.disable {
+    background: url('../img/AccountStatus/disable.png') center center no-repeat;
+}
+.AccountStatus.disable.delete {
+    background: url('../img/AccountStatus/disable_deleted.png') center center no-repeat;
+}
+.AccountStatus.disable.strikes {}
+.AccountStatus.disable.delete.strikes {}
+.AccountStatus.delete {
+    background: url('../img/AccountStatus/deleted.png') center center no-repeat;
+}
+.AccountStatus.delete.strikes {}
+.AccountStatus.strikes {}
 
 .avatarBlock {
     position: relative;
@@ -211,7 +232,7 @@ ul.accountSocial li.icon.siteUrl:hover {
 
 .accountUserPanel .accountUserPanelLeft {
     float: left;
-    //background-color: rgba(0,0,0,0.3);
+    /*background-color: rgba(0,0,0,0.3);*/
     width: 260px;
     height: 400px;
 }
@@ -223,7 +244,7 @@ ul.accountSocial li.icon.siteUrl:hover {
 }
 
 .accountUserPanel .avatarBox {
-    
+    position: relative;
 }
 .accountUserPanel .contactsBox {
     margin: 0px;

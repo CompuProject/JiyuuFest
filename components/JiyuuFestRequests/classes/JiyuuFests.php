@@ -149,7 +149,7 @@ class JiyuuFests {
     }
     
     private function getCreateRequestButton() {
-        if($this->checkStartStopDate()) {
+        if($this->yourUser->isAdmin() || $this->checkStartStopDate()) {
             return '<a class="FestElementSendRequestButton" href="'.
                     $this->urlHelper->chengeParams(array($this->festData['fest'],'createRequest')).
                     '" title="Принять правила">'.$this->localization->getText("SendRequest").'</a>';

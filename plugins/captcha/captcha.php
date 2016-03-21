@@ -1,6 +1,6 @@
 <?php 
 // Задаем список символов, используемых в капче 
-$capletters = 'ABCDEFGKIJKLMNOPQRSTUVWXYZ123456789'; 
+$capletters = 'ABCDEFGKIJKLMNPRSTUVWXYZ123456789'; 
 // Длина капчи 7 знаков 
 $captlen = 7; 
 // Устанавливаем размеры изображения 

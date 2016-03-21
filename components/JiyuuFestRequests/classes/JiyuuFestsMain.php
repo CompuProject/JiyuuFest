@@ -34,7 +34,7 @@ class JiyuuFestsMain {
                     } else {
                         switch ($this->URL_PARAMS[1]) {
                             case 'createRequest':
-                                if($this->checkStartStopDate()) {
+                                if($this->yourUser->isAdmin() || $this->checkStartStopDate()) {
                                     if(!isset($this->URL_PARAMS[2])) {
                                         $jiyuuFestsRequestType = new JiyuuFestRequestType($this->URL_PARAMS[0]);
                                         $this->HTML = $jiyuuFestsRequestType->getHtml();
@@ -46,7 +46,7 @@ class JiyuuFestsMain {
                                 }
                                 break;
                             case 'editRequest':
-                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                if ($this->yourUser->isAdmin() || $this->checkStartStopDate() || $this->checkStopEndDate()) {
                                     if(isset($this->URL_PARAMS[2])) {
                                         $editeRequest = new JiyuuFestRequest_EditeRequestMain($this->URL_PARAMS[2]);
                                         $this->HTML = $editeRequest->getHtml(); 
@@ -56,7 +56,7 @@ class JiyuuFestsMain {
                                 }
                                 break;
                             case 'deleteRequest':
-                                if(isset($this->URL_PARAMS[2])) {
+                                if($this->yourUser->isAdmin() || isset($this->URL_PARAMS[2])) {
                                     $deleteRequest = new JiyuuFestRequest_DeleteRequest($this->URL_PARAMS[2], (isset($this->URL_PARAMS[3]) && $this->URL_PARAMS[3] == 'success'));
                                     $this->HTML = $deleteRequest->getHtml();
                                 } else {
@@ -64,7 +64,7 @@ class JiyuuFestsMain {
                                 }
                                 break;
                             case 'addRequestUser':
-                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                if ($this->yourUser->isAdmin() || $this->checkStartStopDate() || $this->checkStopEndDate()) {
                                     if(isset($this->URL_PARAMS[2])) {
                                         $user = new JiyuuFestRequestUsers_Add($this->URL_PARAMS[2]);
                                         $this->HTML = $user->getHtml();
@@ -74,7 +74,7 @@ class JiyuuFestsMain {
                                 }
                                 break;
                             case 'deleteRequestUser':
-                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                if ($this->yourUser->isAdmin() || $this->checkStartStopDate() || $this->checkStopEndDate()) {
                                     if(isset($this->URL_PARAMS[2]) && isset($this->URL_PARAMS[3])) {
                                         $user = new JiyuuFestRequestUsers_Delete($this->URL_PARAMS[2],$this->URL_PARAMS[3],(isset($this->URL_PARAMS[4]) && $this->URL_PARAMS[4] == 'success'));
                                         $this->HTML = $user->getHtml();
@@ -84,7 +84,7 @@ class JiyuuFestsMain {
                                 }
                                 break;
                             case 'editRequestUsers':
-                                if ($this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                if ($this->yourUser->isAdmin() || $this->checkStartStopDate() || $this->checkStopEndDate()) {
                                     if(isset($this->URL_PARAMS[2]) && isset($this->URL_PARAMS[3])) {
                                         $user = new JiyuuFestRequestUsers_Edit($this->URL_PARAMS[2],$this->URL_PARAMS[3]);
                                         $this->HTML = $user->getHtml();
@@ -95,10 +95,22 @@ class JiyuuFestsMain {
                                 break;
                             case 'adminpage':
                                 if ($this->yourUser->isAdmin()) {
-                                    $requestsListFromFilter = new JiyuuFestRequestFilter($this->URL_PARAMS[1]);
+                                    $requestsListFromFilter = new JiyuuFestRequestFilter($this->URL_PARAMS[0]);
                                     $this->HTML = $requestsListFromFilter->getHtml();
                                 } else {
                                     $this->errorBuffer[] = $this->localization->getText("ErrorPermissionDenied");
+                                }
+                                break;
+                            case 'changeStatus':
+                                if ($this->yourUser->isAdmin() || $this->checkStartStopDate() || $this->checkStopEndDate()) {
+                                    if(isset($this->URL_PARAMS[2]) && isset($this->URL_PARAMS[3])) {
+                                        $user = new JiyuuFestRequest_ChangeStatus($this->URL_PARAMS[2],$this->URL_PARAMS[3]);
+                                        $this->HTML = $user->getHtml();
+                                    } else {
+                                        $this->errorBuffer[] = $this->localization->getText("ErrorNoRequestID");
+                                    }
+                                } else {
+                                    $this->errorBuffer[] = $this->localization->getText("ErrorChangeStatusForOldRequest");
                                 }
                                 break;
                             case 'showApprovedRequest':
@@ -122,7 +134,14 @@ class JiyuuFestsMain {
                                 break;
                         }
                     }
-                } else {
+                } else if(isset($this->URL_PARAMS[0]) && $this->URL_PARAMS[0]=='adminpage') {
+                    if ($this->yourUser->isAdmin()) {
+                        $requestsListFromFilter = new JiyuuFestRequestFilter();
+                        $this->HTML = $requestsListFromFilter->getHtml();
+                    } else {
+                        $this->errorBuffer[] = $this->localization->getText("ErrorPermissionDenied");
+                    }
+                }else {
                     $this->errorBuffer[] = $this->localization->getText("ErrorUnknownFest");
                 }
             }

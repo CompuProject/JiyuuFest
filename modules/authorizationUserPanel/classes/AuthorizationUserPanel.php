@@ -7,11 +7,11 @@ class AuthorizationUserPanel {
     private $avatarDir="./resources/Components/Users/";
     
     public function __construct() {
+        $this->urlHelper = new UrlHelper();
         $this->inputHelper = new InputHelper();
         $this->localization = new Localization("AuthorizationUserPanel");
         $this->userData = new UserData();
         $this->getAuthorizationUserForm();
-        $this->urlHelper = new UrlHelper();
     }
     
     private function getAuthorizationUserForm() {
@@ -29,7 +29,7 @@ class AuthorizationUserPanel {
                 $this->form .= "<div class='AuthorizationFormLogin'></div>";
             $this->form .= '</td>';
             $this->form .= '<td>';
-                $this->form .= $this->inputHelper->paternTextBox("login", "login", "login", 25, true, $this->localization->getText("login"), "[A-Za-z0-9]{3,20}", null);
+                $this->form .= $this->inputHelper->paternTextBox("login", "login", "login", 50, true, $this->localization->getText("login"), "[A-Za-z0-9_\.-\+@()]{3,50}", null);
             $this->form .= '</td>';
             //$this->form .= '<td rowspan="2">';
                 
@@ -47,9 +47,9 @@ class AuthorizationUserPanel {
         $this->form .= '</table>';
         
         $this->form .= '<input class="AuthorizationFormButton" type="submit" name="AuthorizationFormSubmit" value="in" title="'.$this->localization->getText("authorizationFormText").'">';
-        
-        
-        
+        $this->form .= '<div class="ResetPasswordButton">';
+        $this->form .= '<a href="'.$this->urlHelper->pageUrl("reset_password", null).'">Восстановить доступ</a>';
+        $this->form .= '</div>';
         $this->form .= "</div>";
         $this->form .= '</center>';
         $this->form .= '</form>';
@@ -80,8 +80,8 @@ class AuthorizationUserPanel {
             echo '    </div>';
             echo '</div>';  
             echo '<div class="LoginPanelBlock RegButon">';
-            echo '    <div class="LoginPanelTextButon RegButon"><a href="'.$this->urlHelper->pageUrl("registration", null).'">Зарегистрироваться</a></div>';
-            echo '</div>';     
+            echo '    <div class="LoginPanelTextButon RegButon"><a href="'.$this->urlHelper->pageUrl("registration", null).'">Регистрация</a></div>';
+            echo '</div>';   
         }
     }
     
@@ -133,6 +133,14 @@ class AuthorizationUserPanel {
 //                    $out .= '<div class="UserPanelLoginBlockElementMenuElement"><a href="'.$this->urlHelper->pageUrl('requests', null).'">Заявки и фестивали</a></div>';
                     if($this->userData->isAdmin()) {
                         $out .= '<div class="UserPanelLoginBlockElementMenuElement"></div>';
+                        $urlParam[0]="adminpage";
+                        $out .= '<div class="UserPanelLoginBlockElementMenuElement"><a href="'.$this->urlHelper->pageUrl('requests', $urlParam).'">Поиск по заявкам</a></div>';
+                        $urlParam[0]="jiyuu2016";
+                        $urlParam[1]="adminpage";
+                        $out .= '<div class="UserPanelLoginBlockElementMenuElement"><a href="'.$this->urlHelper->pageUrl('requests', $urlParam).'">Заявки Jiyuu 2016</a></div>';
+                        
+                        $out .= '<div class="UserPanelLoginBlockElementMenuElement"></div>';
+                        
                         $out .= '<div class="UserPanelLoginBlockElementMenuElement"><a href="'.$this->urlHelper->pageUrl('adminpanel', null).'">Админпанель</a></div>';
                         $urlParam[0]="components";
                         $out .= '<div class="UserPanelLoginBlockElementMenuElement"><a href="'.$this->urlHelper->pageUrl('adminpanel', $urlParam).'">Админпанель компонент</a></div>';

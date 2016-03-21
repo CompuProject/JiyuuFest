@@ -58,12 +58,32 @@ input[type=submit].AuthorizationFormButton:hover {
 
 
 .LoginPanelBlock .LoginPanel {
-    height: 60px;
+    height: 80px;
     width: 270px;
     background: rgba(0,0,0,0.5);
     padding-top: 10px;
     float: right;
     display: none;
+}
+.LoginPanelBlock .LoginPanel .ResetPasswordButton {
+    margin-top: 10px;
+}
+.LoginPanelBlock .LoginPanel .ResetPasswordButton a {
+    background-color: #444444;
+    border-radius: 5px;
+    display: block;
+    width: 150px;
+    height: 20px;
+    text-decoration: none;
+    font: bold 12px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    text-shadow: none;
+    color: #fff;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+.LoginPanelBlock .LoginPanel .ResetPasswordButton a:hover {
+    background-color: #222222;
 }
 
 .LoginPanelBlock.active .LoginPanel{

@@ -229,7 +229,7 @@ ol li ol {
     height: 298px;
     background: url('../img/hand.png') center center no-repeat;
     position: relative; 
-    z-index: 9999;
+    z-index: 100;
 }
 .HeadBlockContent {
     padding: 0px;
@@ -468,5 +468,11 @@ input[type=file] {
 }
 .copy a {
     text-decoration: none;
+    color: #1b7fcc;
+}
+
+
+.faqTitle {
+    font: bold 18px/30px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
     color: #1b7fcc;
 }
